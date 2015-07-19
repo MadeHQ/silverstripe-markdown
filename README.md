@@ -1,6 +1,10 @@
 # SilverStripe Markdown
 SilverStripe Module. Replaces TinyMCE with a Markdown editor.
 
+## Dependencies
+* [Ace Editor](http://ace.c9.io/#nav=about)
+* [Parsedown](http://parsedown.org)
+
 ## License ##
     Copyright (c) 2015, Made Media Ltd. - www.mademedia.co.uk
     All rights reserved.
