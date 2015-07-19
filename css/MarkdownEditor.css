@@ -1,0 +1,22 @@
+.markdowneditor .middleColumn {
+    border: none;
+}
+
+.markdowneditor .markdowneditor_editor {
+	border: 1px solid #CCCCCC;
+    position: relative;
+    font-family: Monaco, "Liberation Mono", Courier, monospace;
+    z-index: 0;
+}
+
+.markdowneditor .markdowneditor_editor .ace_content {
+    line-height: normal;
+}
+
+.markdowneditor .ace_focus {
+	border: 1px solid #9a9a9a;
+	border-top-color: #808080;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+}
