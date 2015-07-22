@@ -12,17 +12,48 @@ class MarkdownEditorField extends TextareaField
      */
     protected $rows = 20;
 
+	private $editorConfigs = 'default';
+
     public function FieldHolder($properties = array()) {
-        $this->extraClasses['stacked'] = 'stacked';
 
-        Requirements::css(MARKDOWN_MODULE_BASE . '/css/MarkdownEditor.css');
+		$this->include_js();
+		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/font-awesome-4.3.0/css/font-awesome.min.css');
+		Requirements::css(MARKDOWN_MODULE_BASE . '/css/MarkdownEditor.css');
+		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.css');
 
-        Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/ace/ace.min.js');
-        Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/ace/mode-markdown.min.js');
-        Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/ace/theme-github.min.js');
-
-        Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkdownEditor.js');
+		Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.js');
+		Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkdownEditorField.js');
 
         return parent::FieldHolder($properties);
     }
+
+	public function setEditorConfigs($editorConfigs){
+		$this->editorConfigs = $editorConfigs;
+	}
+
+	function getEditorConfigs(){
+		return $this->editorConfigs;
+	}
+
+	public function include_js() {
+		$configObj = MarkdownEditorConfig::get($this->editorConfigs);
+		Requirements::insertHeadTags('<script>var markdownEditorConfigs = {};</script>', 'MarkdownEditorConfigHolder');
+		Requirements::insertHeadTags('<script>' . $configObj->generateJS() . '</script>', 'MarkdownEditorConfig_' . $this->editorConfigs);
+	}
+
+	function getAttributes(){
+		$attributes = parent::getAttributes();
+		$attributes['configs'] = $this->editorConfigs;
+		return $attributes;
+	}
+
+
+
+
+}
+
+
+class MarkdownEditorField_Toolbar extends RequestHandler {
+
+
 }

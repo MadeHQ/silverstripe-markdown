@@ -1,0 +1,26 @@
+---
+Name: markdown
+After: 'framework/*','cms/*'
+---
+# YAML configuration for SilverStripe
+# See http://doc.silverstripe.org/framework/en/topics/configuration
+# Caution: Indentation through two spaces, not tabs
+MarkdownExtension:
+  replace_html_fields: true
+
+DataObject:
+  extensions:
+    - MarkdownExtension
+
+#    - TextileSiteTreeExtension
+#LeftAndMain:
+#  extensions:
+#    - TextileLeftAndMainExtension
+#TextileField:
+#  custom_tags:
+#    Italic:
+#      open: '_'
+#      close: '_'
+#TextileEditorField:
+#  extensions:
+#    - TextileVideoEmbed

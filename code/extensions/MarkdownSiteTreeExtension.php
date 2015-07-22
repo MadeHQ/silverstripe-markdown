@@ -7,24 +7,7 @@
  */
 class MarkdownSiteTreeExtension extends DataExtension
 {
-    private static $db = array(
-        "Content" => "Text"
-    );
 
-    /**
-     * updateCMSFields
-     * Replaces all instances of HtmlEditorField with MarkdownField.
-     *
-     * @param FieldList $fields
-     */
-    public function updateCMSFields(FieldList $fields) {
-        foreach($fields->dataFields() as $field) {
-            if($field instanceof HtmlEditorField) {
-                $markdownEditorField = new MarkdownEditorField($field->name, $field->title, 30);
-                $fields->replaceField($field->name, $markdownEditorField);
-            }
-        }
-    }
 
     /**
      * Content
@@ -33,14 +16,22 @@ class MarkdownSiteTreeExtension extends DataExtension
      * @return string Parsed HTML
      */
     public function Content() {
-        $content = $this->owner->Content;
-        // Replace variables with CMS content.
-        $data = $this->owner->toMap();
-        foreach ($data as $field => $value) {
-            $field = "$" . $field;
-            $content = str_replace($field, $value, $content);
-        }
-        $parser = new Parsedown();
-        return $parser->text($content);
+		$content = $this->owner->dbObject('Content');
+		$strContent = $content;
+		if(method_exists($content, 'forTemplate')){
+			$strContent = $content->forTemplate();
+		}
+		$data = $this->owner->toMap();
+		foreach ($data as $field => $value) {
+			$field = "$" . $field;
+			$content = str_replace($field, $value, $content);
+		}
+
+		return $strContent;
+
+
     }
+
+
+
 }

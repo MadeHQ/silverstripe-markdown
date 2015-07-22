@@ -1,7 +1,24 @@
+
+
+
 .markdowneditor .middleColumn {
     border: none;
 }
 
+.markdowneditor .editor-toolbar {
+    background: #FFFFFF;
+}
+
+.markdowneditor .CodeMirror {
+    background: #FFFFFF;
+}
+
+
+
+/**
+DEPRECATED
+
+*/
 .markdowneditor .markdowneditor_editor {
 	border: 1px solid #CCCCCC;
     position: relative;

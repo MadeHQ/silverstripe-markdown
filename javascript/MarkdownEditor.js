@@ -11,7 +11,7 @@
                     width: '100%',
                     height: $(this).height()
                 });
-                
+
                 $(this).setTextArea($(this));
                 $(this).hide();
                 
