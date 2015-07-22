@@ -13,6 +13,47 @@
     background: #FFFFFF;
 }
 
+.markdowneditor .editor-toolbar .fa.h1:after {
+    content: "1";
+    position: relative;
+    top: 1px;
+    margin-left: 1px;
+}
+
+.markdowneditor .editor-toolbar .fa.h2:after {
+    content: "2";
+    position: relative;
+    top: 1px;
+    margin-left: 1px;
+}
+
+.markdowneditor .editor-toolbar .fa.h3:after {
+    content: "3";
+    position: relative;
+    top: 1px;
+    margin-left: 1px;
+}
+
+.markdowneditor .editor-toolbar .fa.h4:after {
+    content: "4";
+    position: relative;
+    top: 1px;
+    margin-left: 1px;
+}
+
+.markdowneditor .editor-toolbar .fa.h5:after {
+    content: "5";
+    position: relative;
+    top: 1px;
+    margin-left: 1px;
+}
+
+.markdowneditor .editor-toolbar .fa.h6:after {
+    content: "6";
+    position: relative;
+    top: 1px;
+    margin-left: 1px;
+}
 
 
 /**

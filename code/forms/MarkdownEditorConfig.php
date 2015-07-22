@@ -13,6 +13,42 @@ class MarkdownEditorConfig {
 
 	private static $button_configs = array(
 		'|'				=> '|',
+		'header-1'			=> array(
+			'name'			=> 'header-1',
+			'action'		=> 'drawMarkdownH1',
+			'className'		=> 'fa fa-header h1',
+			'title'			=> 'Header 1',
+		),
+		'header-2'			=> array(
+			'name'			=> 'header-2',
+			'action'		=> 'drawMarkdownH2',
+			'className'		=> 'fa fa-header h2',
+			'title'			=> 'Header 2',
+		),
+		'header-3'			=> array(
+			'name'			=> 'header-3',
+			'action'		=> 'drawMarkdownH3',
+			'className'		=> 'fa fa-header h3',
+			'title'			=> 'Header 3',
+		),
+		'header-4'			=> array(
+			'name'			=> 'header-4',
+			'action'		=> 'drawMarkdownH4',
+			'className'		=> 'fa fa-header h4',
+			'title'			=> 'Header 4',
+		),
+		'header-5'			=> array(
+			'name'			=> 'header-5',
+			'action'		=> 'drawMarkdownH5',
+			'className'		=> 'fa fa-header h5',
+			'title'			=> 'Header 5',
+		),
+		'header-6'			=> array(
+			'name'			=> 'header-6',
+			'action'		=> 'drawMarkdownH6',
+			'className'		=> 'fa fa-header h6',
+			'title'			=> 'Header 6',
+		),
 		'bold'			=> array(
 			'name'			=> 'bold',
 			'action'		=> 'toggleBold',
@@ -76,7 +112,7 @@ class MarkdownEditorConfig {
 		'autosave',
 	);
 
-	protected $buttons = array('bold','italic','|','quote','unordered-list',
+	protected $buttons = array('header-1','header-2','header-3','header-4','header-5','header-6','|', 'bold','italic','|','quote','unordered-list',
 			'ordered-list','|','link','image','|','preview','guide'
 	);
 

@@ -660,7 +660,7 @@ SimpleMDE.prototype.createToolbar = function(items) {
 	var cm = this.codemirror;
 	cm.on('cursorActivity', function() {
 		var stat = getState(cm);
-
+console.log(stat);
 		for (var key in self.toolbar) {
 			(function(key) {
 				var el = self.toolbar[key];
