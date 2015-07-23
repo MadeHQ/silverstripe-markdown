@@ -15,6 +15,7 @@ class MarkdownEditorField extends TextareaField
 	private $editorConfigs = 'default';
 
     public function FieldHolder($properties = array()) {
+        $this->extraClasses['stacked'] = 'stacked';
 
 		$this->include_js();
 		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/font-awesome-4.3.0/css/font-awesome.min.css');
