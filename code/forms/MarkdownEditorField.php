@@ -48,6 +48,12 @@ class MarkdownEditorField extends TextareaField
 		Requirements::insertHeadTags('<script>' . $configObj->generateJS() . '</script>', 'MarkdownEditorConfig_' . $this->editorConfigs);
 	}
 
+	public static function include_default_js(){
+		$configObj = MarkdownEditorConfig::get('default');
+		Requirements::insertHeadTags('<script>var markdownEditorConfigs = {};</script>', 'MarkdownEditorConfigHolder');
+		Requirements::insertHeadTags('<script>' . $configObj->generateJS() . '</script>', 'MarkdownEditorConfig_default');
+	}
+
 	function getAttributes(){
 		$attributes = parent::getAttributes();
 		$attributes['configs'] = $this->editorConfigs;
