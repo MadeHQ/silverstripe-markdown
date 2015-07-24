@@ -36,8 +36,8 @@ class MarkdownText extends Text {
 		$parser = new Parsedown();
 		$value = $this->value;
 		$this->extend('onBeforeParseMarkDown', $value);
-		$value = ShortcodeParser::get_active()->parse($value);
 		$value = $parser->text($value);
+		$value = ShortcodeParser::get_active()->parse($value);
 		$this->extend('onAfterParseMarkDown', $value);
 		return $value;
 	}
