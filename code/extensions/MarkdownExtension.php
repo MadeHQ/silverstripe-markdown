@@ -37,6 +37,9 @@ class MarkdownExtension extends DataExtension {
 		}
 	}
 
+	public function updateCMSFieldSecondary(FieldList $fields){
+		$this->updateCMSFields($fields);
+	}
 
 	public function updateCMSFields(FieldList $fields){
 		if(Config::inst()->get('MarkdownExtension', 'replace_html_fields')){
