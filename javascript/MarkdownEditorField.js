@@ -161,6 +161,9 @@ function drawMarkdownH6(editor){
                 simplemde.render();
 
                 simplemde.codemirror.on("change", function(){
+                    var form = editorTextArea.closest('.cms-edit-form');
+                    form.find('#Form_EditForm_action_save').button({showingAlternate: true});
+                    form.find('#Form_EditForm_action_publish').button({showingAlternate: true});
                     editorTextArea.val(simplemde.value());
                 });
             }
