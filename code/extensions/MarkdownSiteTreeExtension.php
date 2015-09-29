@@ -8,7 +8,6 @@
 class MarkdownSiteTreeExtension extends DataExtension
 {
 
-
     /**
      * Content
      * Parses Markdown to HTML.
@@ -21,14 +20,8 @@ class MarkdownSiteTreeExtension extends DataExtension
 		if(method_exists($content, 'forTemplate')){
 			$strContent = $content->forTemplate();
 		}
-		$data = $this->owner->toMap();
-		foreach ($data as $field => $value) {
-			$field = "$" . $field;
-			$content = str_replace($field, $value, $content);
-		}
-
-		return $strContent;
-
+		$template = SSViewer_FromString::fromString($strContent);
+		return $this->owner->renderWith($template);
 
     }
 
