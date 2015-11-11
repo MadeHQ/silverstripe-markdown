@@ -102,7 +102,14 @@ class MarkdownEditorConfig {
 			'action' 		=> 'http://nextstepwebs.github.io/simplemde-markdown-editor/markdown-guide',
 			'className' 	=> 'fa fa-question-circle',
 			'title' 		=> 'Markdown Guide',
+		),
+		'shortcodable'	=> array(
+			'name' 			=> 'shortcodable',
+			'action' 		=> 'shortCode',
+			'className' 	=> 'fa fa-eye',
+			'title' 		=> 'Short Code',
 		)
+
 	);
 
 	private $identifier = '';
@@ -113,7 +120,7 @@ class MarkdownEditorConfig {
 	);
 
 	protected $buttons = array('header-1','header-2','header-3','header-4','header-5','header-6','|', 'bold','italic','|','quote','unordered-list',
-			'ordered-list','|','link','image','|','preview','guide'
+			'ordered-list','|','link','image','|','preview','guide','shortcodable'
 	);
 
 	public function __construct($identifier){

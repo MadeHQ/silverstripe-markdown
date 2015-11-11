@@ -1,3 +1,5 @@
+
+
 var isMac = /Mac/.test(navigator.platform);
 
 var shortcuts = {
@@ -225,6 +227,15 @@ function redo(editor) {
 }
 
 /**
+ * Action for drawing an img.
+ */
+function shortCode(editor) {
+
+	var cm = editor.codemirror;
+	MadeUtils.MarkDownEditor.OpenDialog();
+}
+
+/**
  * Preview action.
  */
 function togglePreview(editor) {
@@ -385,6 +396,7 @@ function _toggleBlock(editor, type, start_chars, end_chars) {
 }
 
 
+
 /* The right word count in respect for CJK. */
 function wordCount(data) {
 	var pattern = /[a-zA-Z0-9_\u0392-\u03c9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g;
@@ -458,6 +470,12 @@ var toolbar = [{
 		action: "http://nextstepwebs.github.io/simplemde-markdown-editor/markdown-guide",
 		className: "fa fa-question-circle",
 		title: "Markdown Guide",
+	},
+	{
+		name: "shortcodable",
+		action: shortCode,
+		className: "fa fa-eye",
+		title: "Short Code",
 	}
 ];
 
@@ -750,6 +768,7 @@ SimpleMDE.drawHorizontalRule = drawHorizontalRule;
 SimpleMDE.undo = undo;
 SimpleMDE.redo = redo;
 SimpleMDE.togglePreview = togglePreview;
+SimpleMDE.shortCode = shortCode;
 SimpleMDE.toggleFullScreen = toggleFullScreen;
 
 /**
@@ -793,4 +812,10 @@ SimpleMDE.prototype.togglePreview = function() {
 };
 SimpleMDE.prototype.toggleFullScreen = function() {
 	toggleFullScreen(this);
+};
+SimpleMDE.prototype.drawImage = function() {
+	drawImage(this);
+};
+SimpleMDE.prototype.shortCode = function() {
+	shortCode(this);
 };
