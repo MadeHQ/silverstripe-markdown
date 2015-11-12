@@ -129,12 +129,32 @@ function drawMarkdownH6(editor){
 };
 
 
+/**
+ * shortcode register
+ */
+
+SimpleMDE.shortCode = shortCode;
+
+/**
+ * Action for adding shortcode
+ */
+function shortCode(editor) {
+    var cm = editor.codemirror;
+    MadeUtils.MarkDownEditor.OpenDialog(cm);
+}
+
+
+SimpleMDE.prototype.shortCode = function() {
+    shortCode(this);
+};
+
+
+
 (function($) {
     $.entwine('ss', function($) {
         $('textarea.markdowneditor').entwine({
 
             onmatch : function(){
-
                 var editorTextArea = $(this);
 
                 var configs = {};
