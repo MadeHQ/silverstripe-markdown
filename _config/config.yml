@@ -12,15 +12,5 @@ DataObject:
   extensions:
     - MarkdownExtension
 
-#    - TextileSiteTreeExtension
-#LeftAndMain:
-#  extensions:
-#    - TextileLeftAndMainExtension
-#TextileField:
-#  custom_tags:
-#    Italic:
-#      open: '_'
-#      close: '_'
-#TextileEditorField:
-#  extensions:
-#    - TextileVideoEmbed
+MarkdownCloudinaryUpload:
+  enable: true

@@ -128,6 +128,10 @@ function drawMarkdownH6(editor){
     _toggleLine(cm, 'header-6');
 };
 
+function drawCloudinaryImage(editor){
+    var cm = editor.codemirror;
+    MadeUtils.CloudinaryMarkdown.CloudinaryImagePopup(cm);
+}
 
 (function($) {
     $.entwine('ss', function($) {
@@ -136,6 +140,13 @@ function drawMarkdownH6(editor){
             onmatch : function(){
 
                 var editorTextArea = $(this);
+
+                // Don't attempt to enable fields which have already been enabled
+                if( editorTextArea.hasClass('MarkdownEditorEnabled') ) {
+                    return;
+                } else {
+                    editorTextArea.addClass('MarkdownEditorEnabled')
+                }
 
                 var configs = {};
                 var configsKey = editorTextArea.attr('configs');

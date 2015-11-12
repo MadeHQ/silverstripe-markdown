@@ -32,6 +32,7 @@ class MarkdownEditorField extends TextareaField
 		Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkdownEditorField.js');
 		Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkdownEditorDialog.js');
 
+        $this->extend("updateFieldHolder");
         return parent::FieldHolder($properties);
     }
 
