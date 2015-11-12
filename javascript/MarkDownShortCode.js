@@ -29,7 +29,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                     });
                 }
             }
-        }
+        };
 
         $('.markdowneditorfield-dialog').entwine({
             onadd: function() {
