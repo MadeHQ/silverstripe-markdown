@@ -18,10 +18,11 @@ class MarkdownEditorField extends TextareaField
         $this->extraClasses['stacked'] = 'stacked';
 
 		$this->include_js();
-		Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkdownShortCode.js');
+		Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkDownShortCode.js');
 		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/font-awesome-4.3.0/css/font-awesome.min.css');
 		Requirements::css(MARKDOWN_MODULE_BASE . '/css/MarkdownEditor.css');
 		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.css');
+
 		if(0 && Director::isDev()){
 			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/sourcefiles/codemirror/codemirror.js');
 			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/sourcefiles/simplemde.js');
