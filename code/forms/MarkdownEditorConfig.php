@@ -87,7 +87,7 @@ class MarkdownEditorConfig {
 		),
 		'image'			=> array(
 			'name' 			=> 'image',
-			'action' 		=> 'drawImage',
+			'action' 		=> 'drawCloudinaryImage',
 			'className' 	=> 'fa fa-picture-o',
 			'title' 		=> 'Insert Image (Ctrl+Alt+I)',
 		),
