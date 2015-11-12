@@ -6,13 +6,16 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
 (function($) {
     $.entwine('MarkDown', function($){
         MadeUtils.MarkDownEditor = {
-            OpenDialog: function(){
-                dialog =$('.markdowneditorfield-shortcodedialog');
-
+            CurrentEditor: '',
+            CurrentDialog: '',
+            OpenDialog: function(cm){
+                MadeUtils.MarkDownEditor.CurrentEditor = cm;
+                dialog = $('.markdowneditorfield-shortcodedialog');
                 if(dialog.length) {
                     dialog.open();
                 } else {
                     dialog = $('<div class="markdowneditorfield-dialog markdowneditorfield-shortcodedialog loading">');
+                    MadeUtils.MarkDownEditor.CurrentDialog = dialog;
                     $('body').append(dialog);
                     $.ajax({
                         url: 'ShortcodableController/ShortcodeForm/forTemplate',

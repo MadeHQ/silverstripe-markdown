@@ -226,14 +226,8 @@ function redo(editor) {
 	cm.focus();
 }
 
-/**
- * Action for drawing an img.
- */
-function shortCode(editor) {
 
-	var cm = editor.codemirror;
-	MadeUtils.MarkDownEditor.OpenDialog();
-}
+
 
 /**
  * Preview action.
@@ -471,12 +465,6 @@ var toolbar = [{
 		className: "fa fa-question-circle",
 		title: "Markdown Guide",
 	},
-	{
-		name: "shortcodable",
-		action: shortCode,
-		className: "fa fa-eye",
-		title: "Short Code",
-	}
 ];
 
 /**
@@ -678,7 +666,6 @@ SimpleMDE.prototype.createToolbar = function(items) {
 	var cm = this.codemirror;
 	cm.on('cursorActivity', function() {
 		var stat = getState(cm);
-console.log(stat);
 		for (var key in self.toolbar) {
 			(function(key) {
 				var el = self.toolbar[key];
@@ -768,7 +755,7 @@ SimpleMDE.drawHorizontalRule = drawHorizontalRule;
 SimpleMDE.undo = undo;
 SimpleMDE.redo = redo;
 SimpleMDE.togglePreview = togglePreview;
-SimpleMDE.shortCode = shortCode;
+
 SimpleMDE.toggleFullScreen = toggleFullScreen;
 
 /**
@@ -813,9 +800,4 @@ SimpleMDE.prototype.togglePreview = function() {
 SimpleMDE.prototype.toggleFullScreen = function() {
 	toggleFullScreen(this);
 };
-SimpleMDE.prototype.drawImage = function() {
-	drawImage(this);
-};
-SimpleMDE.prototype.shortCode = function() {
-	shortCode(this);
-};
+
