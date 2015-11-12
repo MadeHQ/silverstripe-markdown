@@ -4,7 +4,7 @@
 if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
 
 (function($) {
-    $.entwine('MarkDown', function($){
+
         MadeUtils.MarkDownEditor = {
             CurrentEditor: '',
             CurrentDialog: '',
@@ -55,7 +55,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                 else this.open();
             }
         });
-    });
+
 })(jQuery);
 
 
