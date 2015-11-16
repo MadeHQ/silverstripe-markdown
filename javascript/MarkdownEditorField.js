@@ -42,6 +42,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
 
                 dialog.find('.field#LinkText').find('input').val('');
                 dialog.find('.field#Description').find('input').val('');
+                dialog.find('.treedropdownfield-title').text('(Choose or Search)');
                 dialog.find('#Form_EditorToolbarLinkForm_internal').val('');
                 dialog.find('#Form_EditorToolbarLinkForm_external').val('');
                 dialog.find('#Form_EditorToolbarLinkForm_email').val('');
