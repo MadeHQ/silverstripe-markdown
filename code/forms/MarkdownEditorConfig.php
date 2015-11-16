@@ -81,7 +81,7 @@ class MarkdownEditorConfig {
 		),
 		'link'			=> array(
 			'name' 			=> 'link',
-			'action' 		=> 'drawLink',
+			'action' 		=> 'drawCMSLink',
 			'className' 	=> 'fa fa-link',
 			'title' 		=> 'Create Link (Ctrl+K)',
 		),
