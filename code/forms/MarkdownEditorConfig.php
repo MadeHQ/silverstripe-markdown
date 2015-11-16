@@ -105,7 +105,7 @@ class MarkdownEditorConfig {
 		),
 		'shortcodable'	=> array(
 			'name' 			=> 'shortcodable',
-			'action' 		=> 'shortCode',
+			'action' 		=> 'drawShortCode',
 			'className' 	=> 'fa fa-code',
 			'title' 		=> 'Short Code',
 		)

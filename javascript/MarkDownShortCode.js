@@ -1,21 +1,18 @@
-/**
- * Created by pathumjayatisse on 11/11/15.
- */
 if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
 
 (function($) {
-
-        MadeUtils.MarkDownEditor = {
+    $.entwine('ss', function($) {
+        MadeUtils.MarkDownShortCode = {
             CurrentEditor: '',
             CurrentDialog: '',
             OpenDialog: function(cm){
-                MadeUtils.MarkDownEditor.CurrentEditor = cm;
+                MadeUtils.MarkDownShortCode.CurrentEditor = cm;
                 dialog = $('.markdowneditorfield-shortcodedialog');
                 if(dialog.length) {
                     dialog.open();
                 } else {
                     dialog = $('<div class="markdowneditorfield-dialog markdowneditorfield-shortcodedialog loading">');
-                    MadeUtils.MarkDownEditor.CurrentDialog = dialog;
+                    MadeUtils.MarkDownShortCode.CurrentDialog = dialog;
                     $('body').append(dialog);
                     $.ajax({
                         url: 'ShortcodableController/ShortcodeForm/forTemplate',
@@ -55,7 +52,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                 else this.open();
             }
         });
-
+    });
 })(jQuery);
 
 
