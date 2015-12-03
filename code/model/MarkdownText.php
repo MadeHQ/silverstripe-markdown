@@ -37,9 +37,18 @@ class MarkdownText extends Text {
 		$value = $this->value;
 		$this->extend('onBeforeParseMarkDown', $value);
 		$value = $parser->text($value);
-		$value = ShortcodeParser::get_active()->parse($value);
+		set_error_handler(array($this, 'onError'));
+		try {
+			$value = ShortcodeParser::get_active()->parse($value);
+		}
+		catch(Exception $e){}
+		restore_error_handler();
 		$this->extend('onAfterParseMarkDown', $value);
 		return $value;
+	}
+
+	function onError($errno, $errstr, $errfile, $errline){
+
 	}
 
 	function NoHTML(){
