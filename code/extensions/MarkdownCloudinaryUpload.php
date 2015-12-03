@@ -73,25 +73,15 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
 			&& isset($_POST['Height'])
 			&& isset($_POST['AltText'])
 		){
-            $arrImages = reset($_POST['Image']);
-			$image = CloudinaryImage::get()->byID($arrImages[0]);
-			if($image){
-				if((int)$_POST['Width'] && (int)$_POST['Height']){
-					$image = $image->FillImage((int)$_POST['Width'], (int)$_POST['Height']);
-				}
+			$arrImages = reset($_POST['Image']);
+			$strRet = "[cloudinary_image,id=".$arrImages[0];
+			if(!empty($_POST['Width']) && !empty($_POST['Height']))
+				$strRet .= ",width=" . $_POST['Width'] . ",height=" . $_POST['Height'];
 
-				$strURL = $image->Link();
+		    if(!empty($_POST['AltText']))
+				$strRet .= ",alt=".$_POST['AltText'];
 
-				$strRet = '!';
-
-				if($_POST['AltText']) {
-					$strRet.= '[' . $_POST['AltText'] . ']';
-				} else {
-					$strRet.= '[]';
-				}
-                $strRet.= '('.$strURL.')';
-
-			}
+			$strRet .= "]";
 		}
 		return Convert::array2json(array(
 			'Markdown'	=> $strRet
