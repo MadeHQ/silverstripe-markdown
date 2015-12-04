@@ -32,12 +32,9 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
 		Requirements::css(FRAMEWORK_DIR .'/admin/css/screen.css');
 		Requirements::css(CMS_DIR . '/css/screen.css');
 
+
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery-ui/jquery-ui.js');
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery-cookie/jquery.cookie.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/javascript/GridField.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.js');
 
 		$numericLabelTmpl = '<span class="step-label"><span class="flyout">%d</span><span class="arrow"></span>'
 			. '<strong class="title">%s</strong></span>';
