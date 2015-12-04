@@ -27,32 +27,17 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
 
 		Requirements::css(FRAMEWORK_DIR .'/admin/thirdparty/jquery-notice/jquery.notice.css');
 		Requirements::css(FRAMEWORK_DIR .'/thirdparty/jquery-ui-themes/smoothness/jquery-ui.css');
-		Requirements::css(FRAMEWORK_DIR .'/admin/thirdparty/chosen/chosen/chosen.css');
 		Requirements::css(FRAMEWORK_DIR .'/thirdparty/jstree/themes/apple/style.css');
-		Requirements::css(FRAMEWORK_DIR .'/css/TreeDropdownField.css');
 		Requirements::css(FRAMEWORK_DIR .'/css/GridField.css');
 		Requirements::css(FRAMEWORK_DIR .'/admin/css/screen.css');
 		Requirements::css(CMS_DIR . '/css/screen.css');
 
-		Requirements::javascript(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
+		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery-ui/jquery-ui.js');
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
 		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery-cookie/jquery.cookie.js');
 		Requirements::javascript(FRAMEWORK_DIR .'/javascript/GridField.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/leaktools.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.Layout.js');
 		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.ActionTabSet.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.Panel.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.Tree.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.Content.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.EditForm.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.Menu.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.Preview.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.BatchActions.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.FieldHelp.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/admin/javascript/LeftAndMain.TreeDropdownField.js');
-		Requirements::javascript(FRAMEWORK_DIR .'/javascript/lang/en.js');
 
 		$numericLabelTmpl = '<span class="step-label"><span class="flyout">%d</span><span class="arrow"></span>'
 			. '<strong class="title">%s</strong></span>';
