@@ -6,9 +6,6 @@ After: 'framework/*','cms/*'
 # See http://doc.silverstripe.org/framework/en/topics/configuration
 # Caution: Indentation through two spaces, not tabs
 
-MarkdownExtension:
-  replace_html_fields: true
-
 DataObject:
   extensions:
     - MarkdownExtension

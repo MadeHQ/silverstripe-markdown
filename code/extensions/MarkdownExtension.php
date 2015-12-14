@@ -9,32 +9,57 @@
 
 class MarkdownExtension extends DataExtension {
 
-	private static $replace_html_fields = true;
-
 	public static function ReplaceHTMLFields(){
-		if(Config::inst()->get('MarkdownExtension', 'replace_html_fields')){
+
+		if(isset($_REQUEST['flush']) && $_REQUEST['flush'] == 'all'){
 			$classes = ClassInfo::subclassesFor('DataObject');
-			foreach($classes as $className){
-				if($db = Config::inst()->get($className, 'db')){
-					if(in_array('HTMLText', $db)){
-						$updateDB = array();
-						foreach($db as $field => $type){
-							$newType = $type;
-							if(strpos($type, 'HTMLText') !== false){
-								$newType = str_replace($type, 'HTMLText', 'MarkdownText');
-							}
-							if(strpos($type, 'HTMLVarchar') !== false){
-								$newType = str_replace($type, 'HTMLVarchar', 'MarkdownVarchar');
-							}
+			$configManifest = new SS_ConfigStaticManifest(BASE_PATH, false, true);
+			$static = $configManifest->getStatics();
 
-							$updateDB[$field] = $newType;
+			$arrUpdated = array();
+
+			foreach($static as $className => $options){
+				if(in_array($className, $classes) && isset($options['db']) && isset($options['db']['value'])){
+					$bUpdated = false;
+					foreach($options['db']['value'] as $field => $type){
+						$newType = $type;
+						if(strpos($type, 'HTMLText') !== false){
+							$newType = str_replace($type, 'HTMLText', 'MarkdownText');
+							$bUpdated = true;
 						}
-
-						Config::inst()->update($className, 'db', $updateDB);
+						if(strpos($type, 'HTMLVarchar') !== false){
+							$newType = str_replace($type, 'HTMLVarchar', 'MarkdownVarchar');
+							$bUpdated = true;
+						}
+						$options['db']['value'][$field] = $newType;
 					}
+
+					if($bUpdated == true){
+						$arrUpdated[$className] = $options;
+						Config::inst()->update($className, 'db', $options['db']['value']);
+					}
+
+				}
+			}
+
+			if(count($arrUpdated)){
+				$cacheClass = defined('SS_MANIFESTCACHE') ? SS_MANIFESTCACHE : 'ManifestCache_File';
+				$cache = new $cacheClass('staticmanifest');
+				$pathKey = sha1(BASE_PATH);
+
+				$keysets = array();
+
+				foreach ($arrUpdated as $class => $details) {
+					$key = sha1($class);
+					$keysets[$key][$class] = $details;
+				}
+
+				foreach ($keysets as $key => $details) {
+					$cache->save($details, $pathKey.'_'.$key);
 				}
 			}
 		}
+
 	}
 
 	public function updateCMSFieldSecondary(FieldList $fields){
