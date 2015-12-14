@@ -19,3 +19,7 @@ MarkdownCloudinaryUpload:
 LeftAndMain:
   extensions:
     - MarkdownLeftAndMainExtension
+
+Director:
+  rules:
+    'cloudinary-upload//$Action': 'MarkdownCloudinaryUpload_Controller'

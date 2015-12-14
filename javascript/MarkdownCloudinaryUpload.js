@@ -18,7 +18,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
         CloudinaryImagePopup : function(codemirror){
             MadeUtils.CloudinaryMarkdown.CodeMirror = codemirror;
 
-            var url = 'MarkdownCloudinaryUpload_Controller/ImageForm/forTemplate',
+            var url = 'cloudinary-upload/ImageForm/forTemplate',
                 dialog = $('.markdowneditorfield-cloudinarydialog');
 
             if(dialog.length) {
