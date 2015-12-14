@@ -25,37 +25,16 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
      */
     public function ImageForm(){
 
-		Requirements::css('framework/admin/thirdparty/jquery-notice/jquery.notice.css');
-		Requirements::css('framework/thirdparty/jquery-ui-themes/smoothness/jquery-ui.css');
-		Requirements::css('framework/admin/thirdparty/chosen/chosen/chosen.css');
-		Requirements::css('framework/thirdparty/jstree/themes/apple/style.css');
-		Requirements::css('framework/css/TreeDropdownField.css');
-		Requirements::css('framework/css/GridField.css');
-		Requirements::css('framework/admin/css/screen.css');
-		Requirements::css('site/css/cms.css');
-		Requirements::css('dashboard/css/dashboard_icon.css');
-		Requirements::css('userforms/css/FieldEditor.css');
-		Requirements::css('cms/css/screen.css');
+		Requirements::css(FRAMEWORK_DIR .'/admin/thirdparty/jquery-notice/jquery.notice.css');
+		Requirements::css(FRAMEWORK_DIR .'/thirdparty/jquery-ui-themes/smoothness/jquery-ui.css');
+		Requirements::css(FRAMEWORK_DIR .'/thirdparty/jstree/themes/apple/style.css');
+		Requirements::css(FRAMEWORK_DIR .'/css/GridField.css');
+		Requirements::css(FRAMEWORK_DIR .'/admin/css/screen.css');
+		Requirements::css(CMS_DIR . '/css/screen.css');
 
-		Requirements::javascript('framework/thirdparty/jquery/jquery.js');
-		Requirements::javascript('framework/thirdparty/jquery-ui/jquery-ui.js');
-		Requirements::javascript('framework/thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
-		Requirements::javascript('framework/thirdparty/jquery-cookie/jquery.cookie.js');
-		Requirements::javascript('framework/javascript/GridField.js');
-		Requirements::javascript('framework/admin/javascript/leaktools.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.Layout.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.ActionTabSet.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.Panel.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.Tree.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.Content.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.EditForm.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.Menu.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.Preview.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.BatchActions.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.FieldHelp.js');
-		Requirements::javascript('framework/admin/javascript/LeftAndMain.TreeDropdownField.js');
-		Requirements::javascript('framework/javascript/lang/en.js');
+
+		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery/jquery.js');
+		Requirements::javascript(FRAMEWORK_DIR .'/thirdparty/jquery-entwine/dist/jquery.entwine-dist.js');
 
 		$numericLabelTmpl = '<span class="step-label"><span class="flyout">%d</span><span class="arrow"></span>'
 			. '<strong class="title">%s</strong></span>';
@@ -87,6 +66,7 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
 		);
 
 		$contentComposite->addExtraClass('ss-insert-image content ss-insert-media');
+        $form->setFormAction('cloudinary-upload/ImageForm');
 		$form->unsetValidator();
 		$form->loadDataFrom($this);
 		$form->addExtraClass('markdownfield-form markdowneditorfield-imageform ');

@@ -387,13 +387,13 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
 
                 // Toggle field visibility depending on the link type.
                 this.find('div.content .field').hide();
-                this.find('.field#LinkType').show();
-                this.find('.field#' + linkType).show();
-                if(linkType == 'internal' || linkType == 'anchor') this.find('.field#Anchor').show();
-                if(linkType !== 'email') this.find('.field#TargetBlank').show();
-                if(linkType == 'anchor') this.find('.field#AnchorSelector').show();
-                this.find('.field#Description').show();
-                this.find('.field#LinkText').show();
+                this.find('#LinkType').show();
+                this.find('#Form_EditorToolbarLinkForm_' + linkType + '_Holder').show();
+                if(linkType == 'internal' || linkType == 'anchor') this.find('#Form_EditorToolbarLinkForm_Anchor_Holder').show();
+                if(linkType !== 'email') this.find('#Form_EditorToolbarLinkForm_TargetBlank_Holder').show();
+                if(linkType == 'anchor') this.find('#Form_EditorToolbarLinkForm_AnchorSelector_Holder').show();
+                this.find('#Form_EditorToolbarLinkForm_Description_Holder').show();
+                this.find('#Form_EditorToolbarLinkForm_LinkText_Holder').show();
 
 
             },
