@@ -83,7 +83,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
             $(this).addClass('changed').addClass('loading');
 
             $.ajax({
-                url         : 'MarkdownCloudinaryUpload_Controller/getImageTag',
+                url         : 'cloudinary-upload/getImageTag',
                 data        : data,
                 dataType    : 'json',
                 type        : 'POST',
