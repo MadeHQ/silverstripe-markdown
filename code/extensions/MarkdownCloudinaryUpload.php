@@ -66,6 +66,7 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
 		);
 
 		$contentComposite->addExtraClass('ss-insert-image content ss-insert-media');
+        $form->setFormAction('cloudinary-upload/ImageForm');
 		$form->unsetValidator();
 		$form->loadDataFrom($this);
 		$form->addExtraClass('markdownfield-form markdowneditorfield-imageform ');
