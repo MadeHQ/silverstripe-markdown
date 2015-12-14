@@ -67,16 +67,14 @@ class MarkdownExtension extends DataExtension {
 	}
 
 	public function updateCMSFields(FieldList $fields){
-		if(Config::inst()->get('MarkdownExtension', 'replace_html_fields')){
-			foreach($fields->dataFields() as $field) {
-				if($field instanceof HtmlEditorField) {
-					$attributes = $field->getAttributes();
+        foreach($fields->dataFields() as $field) {
+            if($field instanceof HtmlEditorField) {
+                $attributes = $field->getAttributes();
 
-					$fields->replaceField($field->getName(),
-						MarkdownEditorField::create($field->getName(), $field->Title())->setRows($attributes['rows']));
-				}
-			}
-		}
+                $fields->replaceField($field->getName(),
+                    MarkdownEditorField::create($field->getName(), $field->Title())->setRows($attributes['rows']));
+            }
+        }
 	}
 
 } 
