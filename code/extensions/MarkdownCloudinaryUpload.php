@@ -91,7 +91,7 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
 				$strRet .= ",width=" . $_POST['Width'] . ",height=" . $_POST['Height'];
 
 		    if(!empty($_POST['AltText']))
-				$strRet .= ",alt=".$_POST['AltText'];
+				$strRet .= ",alt='".$_POST['AltText']."'";
 
 			$strRet .= "]";
 		}
