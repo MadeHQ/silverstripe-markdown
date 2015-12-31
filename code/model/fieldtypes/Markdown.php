@@ -1,5 +1,6 @@
 <?php
-class Markdown extends Text {
+class Markdown extends Text
+{
     public static $casting=array(
                                 'AsHTML'=>'HTMLText',
                                 'Markdown'=>'Text'
@@ -20,20 +21,21 @@ class Markdown extends Text {
      * @param {bool} $useGFM Use Github Flavored Markdown or render using plain markdown defaults to false just like how readme files are rendered on github
      * @return {string} Markdown rendered as HTML
      */
-    public function AsHTML($useGFM=false) {
-        if($this->parsedHTML!==false) {
+    public function AsHTML($useGFM=false)
+    {
+        if ($this->parsedHTML!==false) {
             return $this->parsedHTML;
         }
         
         //Setup renderer
         $renderer=$this->getRenderer();
         $supported=$renderer->isSupported();
-        if($supported!==true) {
+        if ($supported!==true) {
             $class_name=get_class($renderer);
             user_error("Renderer $class_name is not supported on this system: $supported");
         }
         
-        if($renderer instanceof GithubMarkdownRenderer) {
+        if ($renderer instanceof GithubMarkdownRenderer) {
             $beforeUseGFM=GithubMarkdownRenderer::getUseGFM();
             
             GithubMarkdownRenderer::setUseGFM($useGFM);
@@ -45,13 +47,13 @@ class Markdown extends Text {
         $cachedHTML=$cache->load($cacheKey);
         
         //Check cache, if it's good use it instead
-        if($cachedHTML!==false) {
+        if ($cachedHTML!==false) {
             $this->parsedHTML=$cachedHTML;
             return $this->parsedHTML;
-        }      
+        }
         
         //If empty save time by not attempting to render
-        if(empty($this->value)) {
+        if (empty($this->value)) {
             return $this->value;
         }
         
@@ -65,7 +67,7 @@ class Markdown extends Text {
         $cache->save($this->parsedHTML, $cacheKey);
         
         //Reset GFM
-        if($renderer instanceof GithubMarkdownRenderer) {
+        if ($renderer instanceof GithubMarkdownRenderer) {
             GithubMarkdownRenderer::setUseGFM($beforeUseGFM);
         }
                 
@@ -79,7 +81,8 @@ class Markdown extends Text {
      *
      * @see GISMarkdown::AsHTML()
      */
-    public function forTemplate() {
+    public function forTemplate()
+    {
         return $this->AsHTML();
     }
 
@@ -87,10 +90,11 @@ class Markdown extends Text {
      * Sets the renderer for markdown fields to use
      * @param {string} $renderer Class Name of an implementation of IMarkdownRenderer
      */
-    public static function setRenderer($renderer) {
-        if(ClassInfo::classImplements($renderer, 'IMarkdownRenderer')) {
+    public static function setRenderer($renderer)
+    {
+        if (ClassInfo::classImplements($renderer, 'IMarkdownRenderer')) {
             self::$renderer=$renderer;
-        }else {
+        } else {
             user_error('The renderer '.$renderer.' does not implement IMarkdownRenderer', E_USER_ERROR);
         }
     }
@@ -99,8 +103,9 @@ class Markdown extends Text {
      * Gets the active mardown renderer
      * @return {IMarkdownRenderer} An implementation of IMarkdownRenderer
      */
-    private function getRenderer() {
-        if(!is_object($this->renderInst)) {
+    private function getRenderer()
+    {
+        if (!is_object($this->renderInst)) {
             $class=self::$renderer;
             $this->renderInst=new $class();
         }
@@ -108,4 +113,3 @@ class Markdown extends Text {
         return $this->renderInst;
     }
 }
-?>
