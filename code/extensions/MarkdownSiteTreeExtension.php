@@ -14,7 +14,7 @@ class MarkdownSiteTreeExtension extends DataExtension
      *
      * @return string Parsed HTML
      */
-    public function Content() {
+    public function ParseContent() {
 		$content = $this->owner->dbObject('Content');
 		$strContent = $content;
 		if(method_exists($content, 'forTemplate')){
