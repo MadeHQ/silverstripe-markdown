@@ -14,17 +14,17 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                     dialog = $('<div class="markdowneditorfield-dialog markdowneditorfield-shortcodedialog loading">');
                     MadeUtils.MarkDownShortCode.CurrentDialog = dialog;
                     $('body').append(dialog);
-                    $.ajax({
-                        url: 'ShortcodableController/ShortcodeForm/forTemplate',
-                        complete: function() {
-                            dialog.removeClass('loading');
-                        },
-                        success: function(html) {
-                            dialog.html(html);
-                            dialog.trigger('ssdialogopen');
-                        }
-                    });
+                    var postdata = {};
+                    var pageId = $('.cms-edit-form :input[name=ID]').val();
+                    postdata.PageId = pageId
                 }
+                var url = 'ShortcodableController/ShortcodeForm/forTemplate';
+                $.post(url, postdata, function(data){
+                    dialog.removeClass('loading');
+                    dialog.html(data);
+                    dialog.trigger('ssdialogopen');
+
+                });
             }
         };
 
