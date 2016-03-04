@@ -610,6 +610,11 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                     form.find('#Form_EditForm_action_publish').button({showingAlternate: true});
                     editorTextArea.val(simplemde.value());
                 });
+
+                editorTextArea.parent().find('.CodeMirror').css({
+                    'height': editorTextArea.height(),
+                    'min-height': editorTextArea.height()
+                });
             }
         });
 
