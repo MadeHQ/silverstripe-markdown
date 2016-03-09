@@ -612,8 +612,8 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                 });
 
                 editorTextArea.parent().find('.CodeMirror').css({
-                    'height': editorTextArea.height(),
-                    'min-height': editorTextArea.height()
+                    'height': editorTextArea.height() ? editorTextArea.height() : '300px',
+                    'min-height': editorTextArea.height() ? editorTextArea.height() : '300px'
                 });
             }
         });
