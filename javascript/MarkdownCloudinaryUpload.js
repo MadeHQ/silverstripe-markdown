@@ -8,11 +8,8 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
         'CodeMirror'                : null,
 
         ClearForm: function(dialog){
+            dialog.find('form').find("input").val("");
             dialog.find('ul.ss-uploadfield-files .ss-uploadfield-item.template-download.in').remove();
-            dialog.find('#Form_ImageForm_Width').val('');
-            dialog.find('#Form_ImageForm_Height').val('');
-            dialog.find('#Form_ImageForm_AltText').val('');
-            dialog.find('#Form_ImageForm_Caption').val('');
         },
 
         CloudinaryImagePopup : function(codemirror){

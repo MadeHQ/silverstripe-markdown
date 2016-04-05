@@ -5,7 +5,7 @@ define('MARKDOWN_MODULE_BASE', basename(dirname(__FILE__)));
 
 MarkdownExtension::ReplaceHTMLFields();
 
-if(ClassInfo::exists('CloudinaryUploadField')){
+if(ClassInfo::exists('CloudinaryFileField')){
     MarkdownEditorField::add_extension('MarkdownCloudinaryUpload');
 }
 

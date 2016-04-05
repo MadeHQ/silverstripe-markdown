@@ -80,20 +80,26 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
      */
     public function getImageTag(){
 		$strRet = '';
-		if(isset($_POST['Image']) && $_POST['Image']
-			&& isset($_POST['Width'])
-			&& isset($_POST['Height'])
-			&& isset($_POST['AltText'])
-		){
-			$arrImages = reset($_POST['Image']);
-			$strRet = "[cloudinary_image,id=".$arrImages[0];
-			if(!empty($_POST['Width']) && !empty($_POST['Height']))
-				$strRet .= ",width=" . $_POST['Width'] . ",height=" . $_POST['Height'];
+		$arrPieces = array('cloudinary_image');
+		if(isset($_POST['Image']) && ($image = $_POST['Image'])){
+			$arrPieces[] = "id='".CloudinaryUtils::file_name($image['URL'])."'";
+			if(!empty($_POST['Width']) && !empty($_POST['Height'])) {
+				$arrPieces[] = "width=" . $_POST['Width'];
+				$arrPieces[] = "height=" . $_POST['Height'];
+			}
+			if(!empty($image['Credit'])) {
+				$arrPieces[] = "credit='" . $image['Credit']."'";
+			}
+			if(!empty($image['Caption'])) {
+				$arrPieces[] = "caption='" . $image['Caption']."'";
+			}
+			$arrPieces[] = "gravity='" . $image['Gravity']."'";
 
-		    if(!empty($_POST['AltText']))
-				$strRet .= ",alt='".$_POST['AltText']."'";
-
-			$strRet .= "]";
+		    if(!empty($_POST['AltText'])) {
+				$arrPieces[] = "alt='".$_POST['AltText']."'";
+			}
+			$arrPieces[] = "created='". strtotime(SS_Datetime::now()) ."'";
+			$strRet = '['. implode(', ', $arrPieces) . ']';
 		}
 		return Convert::array2json(array(
 			'Markdown'	=> $strRet
