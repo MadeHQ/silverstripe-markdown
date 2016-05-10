@@ -10,36 +10,63 @@
 class MarkdownExtension extends DataExtension {
 
     private static $replace_html_fields = true;
+    private static $db_field_cache = array();
+    private static $disable_markdown_fields = false;
 
-    public static function ReplaceHTMLFields(){
-        if(Config::inst()->get('MarkdownExtension', 'replace_html_fields')){
-            $classes = ClassInfo::subclassesFor('DataObject');
-            foreach($classes as $className){
-                if($db = Config::inst()->get($className, 'db')){
-                    if(in_array('HTMLText', $db)){
-                        $updateDB = array();
-                        foreach($db as $field => $type){
-                            $newType = $type;
-                            if(strpos($type, 'HTMLText') !== false){
-                                $newType = str_replace($type, 'HTMLText', 'MarkdownText');
-                            }
-                            if(strpos($type, 'HTMLVarchar') !== false){
-                                $newType = str_replace($type, 'HTMLVarchar', 'MarkdownVarchar');
-                            }
+    protected static function without_markdown_fields($callback) {
+        $before = self::$disable_markdown_fields;
+        self::$disable_markdown_fields = true;
+        $result = $callback();
+        self::$disable_markdown_fields = $before;
+        return $result;
+    }
 
-                            $updateDB[$field] = $newType;
-                        }
 
-                        Config::inst()->update($className, 'db', $updateDB);
-                    }
+    public static function get_db_fields_for_class($class)
+    {
+        if(isset(self::$db_field_cache[$class])) {
+            return self::$db_field_cache[$class];
+        }
+        $db = self::without_markdown_fields(function() use ($class) {
+            return DataObject::custom_database_fields($class);
+        });
+        self::$db_field_cache[$class] = $db;
+        return self::$db_field_cache[$class];
+    }
+
+
+    public static function get_extra_config($class, $extension, $args) {
+        if(!self::$replace_html_fields) return array();
+        if(self::$disable_markdown_fields) return array();
+
+        $config = Config::inst();
+        // Merge all config values for subclasses
+        foreach (ClassInfo::subclassesFor($class) as $subClass) {
+            $db = self::get_db_fields_for_class($subClass);
+            $updated = false;
+            foreach($db as $field => $type){
+                if(strpos($type, 'HTMLText') !== false){
+                    $updated = true;
+                    $db[$field] =  str_replace($type, 'HTMLText', 'MarkdownText');
+                }
+                if(strpos($type, 'HTMLVarchar') !== false){
+                    $updated = true;
+                    $db[$field] =  str_replace($type, 'HTMLVarchar', 'MarkdownVarchar');
                 }
             }
+            if($updated){
+               $config->update($subClass, 'db', $db);
+            }
         }
+        // Force all subclass DB caches to invalidate themselves since their db attribute is now expired
+        DataObject::reset();
     }
+
 
     public function updateCMSFieldSecondary(FieldList $fields){
         $this->updateCMSFields($fields);
     }
+
 
     public function updateCMSFields(FieldList $fields){
         if(Config::inst()->get('MarkdownExtension', 'replace_html_fields')){
@@ -53,5 +80,6 @@ class MarkdownExtension extends DataExtension {
             }
         }
     }
+
 
 } 
