@@ -581,7 +581,9 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                     editorTextArea.addClass('MarkdownEditorEnabled')
                 }
 
-                var configs = {};
+                var configs = {
+                    spellChecker: false
+                };
                 var configsKey = editorTextArea.attr('configs');
                 if(typeof markdownEditorConfigs !== 'undefined' && typeof markdownEditorConfigs[configsKey] !== 'undefined'){
                     var configTemplate = markdownEditorConfigs[configsKey];
@@ -600,6 +602,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                 }
 
                 configs.element = editorTextArea[0];
+
 
                 var simplemde = new SimpleMDE(configs);
                 simplemde.render();
