@@ -582,7 +582,8 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                 }
 
                 var configs = {
-                    spellChecker: false
+                    spellChecker: false,
+                    autofocus   : true
                 };
                 var configsKey = editorTextArea.attr('configs');
                 if(typeof markdownEditorConfigs !== 'undefined' && typeof markdownEditorConfigs[configsKey] !== 'undefined'){
@@ -602,16 +603,22 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                 }
 
                 configs.element = editorTextArea[0];
-
-
                 var simplemde = new SimpleMDE(configs);
+                var madeChanges = false;
                 simplemde.render();
 
                 simplemde.codemirror.on("change", function(){
                     var form = editorTextArea.closest('.cms-edit-form');
-                    form.find('#Form_EditForm_action_save').button({showingAlternate: true});
-                    form.find('#Form_EditForm_action_publish').button({showingAlternate: true});
+                    madeChanges = true;
                     editorTextArea.val(simplemde.value());
+                });
+
+                simplemde.codemirror.on('blur', function(){
+                    var form = editorTextArea.closest('.cms-edit-form');
+                    if(madeChanges) {
+                        form.find('#Form_EditForm_action_save').button({showingAlternate: true});
+                        form.find('#Form_EditForm_action_publish').button({showingAlternate: true});
+                    }
                 });
 
                 editorTextArea.parent().find('.CodeMirror').css({
