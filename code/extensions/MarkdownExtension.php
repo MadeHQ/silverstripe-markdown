@@ -28,7 +28,7 @@ class MarkdownExtension extends DataExtension {
             return self::$db_field_cache[$class];
         }
         $db = self::without_markdown_fields(function() use ($class) {
-            return DataObject::custom_database_fields($class);
+            return Config::inst()->get($class, 'db', Config::UNINHERITED);;
         });
         self::$db_field_cache[$class] = $db;
         return self::$db_field_cache[$class];
@@ -42,20 +42,21 @@ class MarkdownExtension extends DataExtension {
         $config = Config::inst();
         // Merge all config values for subclasses
         foreach (ClassInfo::subclassesFor($class) as $subClass) {
-            $db = self::get_db_fields_for_class($subClass);
-            $updated = false;
-            foreach($db as $field => $type){
-                if(strpos($type, 'HTMLText') !== false){
-                    $updated = true;
-                    $db[$field] =  str_replace($type, 'HTMLText', 'MarkdownText');
+            if($db = self::get_db_fields_for_class($subClass)) {
+                $updated = false;
+                foreach ($db as $field => $type) {
+                    if (strpos($type, 'HTMLText') !== false) {
+                        $updated = true;
+                        $db[$field] = str_replace($type, 'HTMLText', 'MarkdownText');
+                    }
+                    if (strpos($type, 'HTMLVarchar') !== false) {
+                        $updated = true;
+                        $db[$field] = str_replace($type, 'HTMLVarchar', 'MarkdownVarchar');
+                    }
                 }
-                if(strpos($type, 'HTMLVarchar') !== false){
-                    $updated = true;
-                    $db[$field] =  str_replace($type, 'HTMLVarchar', 'MarkdownVarchar');
+                if ($updated) {
+                    $config->update($subClass, 'db', $db);
                 }
-            }
-            if($updated){
-               $config->update($subClass, 'db', $db);
             }
         }
         // Force all subclass DB caches to invalidate themselves since their db attribute is now expired
