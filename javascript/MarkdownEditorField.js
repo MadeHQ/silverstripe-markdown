@@ -215,7 +215,35 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
 
                 return ret;
             },
+            /**
+             * Wraps the selection with '<div class="well"></div>'
+             * Also indents to content to make it easier to spot
+             */
+            addWell: function (cm) {
+                if (/editor-preview-active/.test(cm.getWrapperElement().lastChild.className))
+                    return;
 
+                var startPoint = cm.getCursor('start');
+                var endPoint = cm.getCursor('end');
+                var text = '\n\n<div class="well">\n';
+                var indent = '\n    ';
+                for (var i = startPoint.line; i <= endPoint.line; i++) {
+                    if (i === startPoint.line) {
+                        if (i === endPoint.line) { // Selection on single Line so just wrap the selection
+                            text+= indent + cm.getLine(i).substr(startPoint.ch, endPoint.ch - startPoint.ch);
+                        } else { // Selection starts part way through a line so star wrapping from selection start
+                            text+= indent + cm.getLine(i).substr(startPoint.ch);
+                        }
+                    } else if (i === endPoint.line) { // Stop wrapping at end of selection
+                        text+= indent + cm.getLine(i).substr(0, endPoint.ch);
+                    } else { // Whole line wrapped
+                        text+= indent + cm.getLine(i);
+                    }
+                }
+                text+= '\n</div>\n\n';
+                cm.replaceRange(text, startPoint, endPoint);
+                cm.focus();
+            },
             _toggleLine: function(cm, name) {
                 if (/editor-preview-active/.test(cm.getWrapperElement().lastChild.className))
                     return;
@@ -660,6 +688,11 @@ function drawMarkdownH5(editor){
 function drawMarkdownH6(editor){
     var cm = editor.codemirror;
     MadeUtils.MarkDownEditor._toggleLine(cm, 'header-6');
+}
+
+function addWell(editor){
+    var cm = editor.codemirror;
+    MadeUtils.MarkDownEditor.addWell(cm);
 }
 
 function drawCMSLink(editor){

@@ -108,7 +108,13 @@ class MarkdownEditorConfig {
 			'action' 		=> 'drawShortCode',
 			'className' 	=> 'fa fa-code',
 			'title' 		=> 'Short Code',
-		)
+		),
+		'well' => array(
+			'name' => 'well',
+			'action' => 'addWell',
+			'className' => 'fa fa-square-o',
+			'title' => 'Well',
+		),
 
 	);
 
@@ -120,7 +126,7 @@ class MarkdownEditorConfig {
 	);
 
 	protected $buttons = array('header-1','header-2','header-3','header-4','header-5','header-6','|', 'bold','italic','|','quote','unordered-list',
-			'ordered-list','|','link','image','|','preview','guide','shortcodable'
+			'ordered-list','well','|','link','image','|','preview','guide','shortcodable'
 	);
 
 	public function __construct($identifier){
@@ -160,4 +166,4 @@ class MarkdownEditorConfig {
 		);
 	}
 
-} 
+}
