@@ -82,7 +82,7 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
 		$strRet = '';
 		$arrPieces = array('cloudinary_image');
 		if(isset($_POST['Image']) && ($image = $_POST['Image'])){
-			$arrPieces[] = "id='".CloudinaryUtils::file_name($image['URL'])."'";
+			$arrPieces[] = "id='".CloudinaryUtils::public_id($image['URL'])."'";
 			if(!empty($_POST['Width']) && !empty($_POST['Height'])) {
 				$arrPieces[] = "width=" . $_POST['Width'];
 				$arrPieces[] = "height=" . $_POST['Height'];
@@ -93,12 +93,13 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
 			if(!empty($image['Caption'])) {
 				$arrPieces[] = "caption='" . $image['Caption']."'";
 			}
+
 			$arrPieces[] = "gravity='" . $image['Gravity']."'";
 
 		    if(!empty($_POST['AltText'])) {
 				$arrPieces[] = "alt='".$_POST['AltText']."'";
 			}
-			$arrPieces[] = "created='". strtotime(SS_Datetime::now()) ."'";
+
 			$strRet = '['. implode(', ', $arrPieces) . ']';
 		}
 		return Convert::array2json(array(
