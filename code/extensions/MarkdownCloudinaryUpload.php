@@ -17,6 +17,11 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
         'getImageTag'
     );
 
+    public function Image()
+    {
+        return new CloudinaryImage();
+    }
+
     /**
      * @return Form
      */
