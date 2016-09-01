@@ -20,3 +20,114 @@ LeftAndMain:
 Director:
   rules:
     'cloudinary-upload//$Action': 'MarkdownCloudinaryUpload_Controller'
+
+MarkdownEditorConfig:
+  button_configs:
+    "|": "|"
+    header-1:
+      name: header-1
+      action: drawMarkdownH1
+      className: fa fa-header h1
+      title: Header 1
+    header-2:
+      name: header-2
+      action: drawMarkdownH2
+      className: fa fa-header h2
+      title: Header 2
+    header-3:
+      name: header-3
+      action: drawMarkdownH3
+      className: fa fa-header h3
+      title: Header 3
+    header-4:
+      name: header-4
+      action: drawMarkdownH4
+      className: fa fa-header h4
+      title: Header 4
+    header-5:
+      name: header-5
+      action: drawMarkdownH5
+      className: fa fa-header h5
+      title: Header 5
+    header-6:
+      name: header-6
+      action: drawMarkdownH6
+      className: fa fa-header h6
+      title: Header 6
+    bold:
+      name: bold
+      action: toggleBold
+      className: fa fa-bold
+      title: Bold (Ctrl+B)
+    italic:
+      name: italic
+      action: toggleItalic
+      className: fa fa-italic
+      title: Italic (Ctrl+I)
+    quote:
+      name: quote
+      action: toggleBlockquote
+      className: fa fa-quote-left
+      title: Quote (Ctrl+)
+    unordered-list:
+      name: unordered-list
+      action: toggleUnorderedList
+      className: fa fa-list-ul
+      title: Generic List (Ctrl+L)
+    ordered-list:
+      name: ordered-list
+      action: toggleOrderedList
+      className: fa fa-list-ol
+      title: Numbered List (Ctrl+Alt+L)
+    link:
+      name: link
+      action: drawCMSLink
+      className: fa fa-link
+      title: Create Link (Ctrl+K)
+    image:
+      name: image
+      action: drawCloudinaryImage
+      className: fa fa-picture-o
+      title: Insert Image (Ctrl+Alt+I)
+    preview:
+      name: preview
+      action: togglePreview
+      className: fa fa-eye
+      title: Toggle Preview (Ctrl+P)
+    guide:
+      name: guide
+      action: http://nextstepwebs.github.io/simplemde-markdown-editor/markdown-guide
+      className: fa fa-question-circle
+      title: Markdown Guide
+    shortcodable:
+      name: shortcodable
+      action: drawShortCode
+      className: fa fa-code
+      title: Short Code
+    well:
+      name: well
+      action: addWell
+      className: fa fa-square-o
+      title: Well
+  buttons:
+    - header-1
+    - header-2
+    - header-3
+    - header-4
+    - header-5
+    - header-6
+    - "|"
+    - bold
+    - italic
+    - "|"
+    - quote
+    - unordered-list
+    - ordered-list
+    - well
+    - "|"
+    - link
+    - image
+    - "|"
+    - preview
+    - guide
+    - shortcodable
