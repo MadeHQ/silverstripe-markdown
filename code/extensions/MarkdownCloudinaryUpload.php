@@ -17,6 +17,11 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
         'getImageTag'
     );
 
+    public function Image()
+    {
+        return new CloudinaryImage();
+    }
+
     /**
      * @return Form
      */
@@ -44,7 +49,7 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
                         '<div class="step1">'
                         . sprintf($numericLabelTmpl, '1', _t('HtmlEditorField.SELECTIMAGE', 'Select Image')) . '</div>'
                     ),
-                    CloudinaryFileField::create('Image')->addExtraClass('markdown-popup'),
+                    CloudinaryImageField::create('Image')->addExtraClass('markdown-popup'),
                     new LiteralField('Step2',
                         '<div class="step2">'
                         . sprintf($numericLabelTmpl, '2', _t('HtmlEditorField.DETAILS', 'Details')) . '</div>'
