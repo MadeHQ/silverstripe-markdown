@@ -418,7 +418,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                 this.find('.field#LinkType').show();
                 this.find('.field#Form_EditorToolbarLinkForm_' + linkType + '_Holder').show();
                 if(linkType == 'internal' || linkType == 'anchor') this.find('.field#Form_EditorToolbarLinkForm_Anchor_Holder').show();
-                if(linkType !== 'email') this.find('.field#TargetBlank').show();
+                if(linkType !== 'email') this.find('.field#Form_EditorToolbarLinkForm_TargetBlank_Holder').show();
                 if(linkType == 'anchor') this.find('.field#Form_EditorToolbarLinkForm_Anchor_Holder').show();
                 this.find('.field#Form_EditorToolbarLinkForm_Description_Holder').show();
                 this.find('.field#Form_EditorToolbarLinkForm_LinkText_Holder').show();
