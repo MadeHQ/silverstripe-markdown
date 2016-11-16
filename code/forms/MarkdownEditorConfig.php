@@ -1,4 +1,10 @@
 <?php
+
+namespace MadeHQ\Markdown\Forms;
+
+use SilverStripe\Core\Convert;
+use SilverStripe\Core\Config\Config;
+
 /**
  * Created by Nivanka Fonseka (nivanka@silverstripers.com).
  * User: nivankafonseka
@@ -29,12 +35,12 @@ class MarkdownEditorConfig {
 
     protected function getButtons()
     {
-        return Config::inst()->get('MarkdownEditorConfig', 'buttons', Config::UNINHERITED);
+        return Config::inst()->get('MadeHQ\Markdown\Forms\MarkdownEditorConfig', 'buttons', Config::UNINHERITED);
     }
 
     protected function getButtonConfigs()
     {
-        return Config::inst()->get('MarkdownEditorConfig', 'button_configs');
+        return Config::inst()->get('MadeHQ\Markdown\Forms\MarkdownEditorConfig', 'button_configs');
     }
 
 	public function generateJS(){

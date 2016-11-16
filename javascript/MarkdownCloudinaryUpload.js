@@ -102,4 +102,3 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
     });
 
 })(jQuery);
-

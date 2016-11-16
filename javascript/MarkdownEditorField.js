@@ -1,6 +1,35 @@
 if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
 
 (function($) {
+    function handleLinkFormSubmission(form) {
+        console.log(form);
+debugger;
+        var attrs = form.getLinkAttributes();
+        var cm = MadeUtils.MarkDownEditor.CodeMirror;
+        // (link_text)(link_address "link_title")
+
+        if(attrs.href){
+
+            var strText = '';
+
+            if(attrs.target && attrs.target == '_blank') {
+                strText += '<a href="'+attrs.href+'" target="'+attrs.target+'" title="'+attrs.title+'">';
+                strText += (attrs.text ? attrs.text : 'Your text to link here...');
+                strText += '</a>';
+            } else {
+                strText += '['+(attrs.text ? attrs.text : 'Your text to link here...')+']';
+                strText += '(' + attrs.href;
+
+                if(attrs.title)
+                    strText += ' "' + attrs.title + '"';
+                strText += ')'
+            }
+            cm.replaceSelection( strText );
+            form.getDialog().close();
+        }
+
+        return false;
+    }
     $.entwine('ss', function($) {
         MadeUtils.MarkDownEditor = {
 
@@ -27,7 +56,26 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                         success: function(html) {
                             dialog.html(html);
                             MadeUtils.MarkDownEditor.SetDefaultValues(dialog);
-                            dialog.trigger('ssdialogopen');
+
+                            dialog.ssdialog({
+                                autoOpen: true,
+                                buttons: {
+                                    'insert': {
+                                        text: i18n._t(
+                                            'HtmlEditorField.INSERT',
+                                            'Insert'
+                                        ),
+                                        'data-icon': 'accept',
+                                        class: 'ss-ui-action-constructive media-insert',
+                                        click: function() {
+                                            handleLinkFormSubmission($(dialog).find('form'));
+// console.log(dialog, $(dialog).find('form'));
+                                            // $(dialog).find('form').trigger('submit');
+                                        }
+                                    }
+                                }
+                            });
+                            // dialog.trigger('ssdialogopen');
                         }
                     });
                 }
@@ -298,10 +346,10 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
 
         $('.markdowneditorfield-dialog').entwine({
             onadd: function() {
-                // Create jQuery dialog
-                if (!this.is('.ui-dialog-content')) {
-                    this.ssdialog({autoOpen: true});
-                }
+            // Create jQuery dialog
+            if (!this.is('.ui-dialog-content')) {
+                this.ssdialog({autoOpen: true});
+            }
 
                 this._super();
             },
@@ -318,6 +366,11 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
             toggle: function(bool) {
                 if(this.is(':visible')) this.close();
                 else this.open();
+            },
+            onscroll: function () {
+                this.animate({
+                    scrollTop: this.find('form').height()
+                }, 500);
             }
         });
 
@@ -372,31 +425,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
             },
 
             onsubmit: function(e) {
-                var attrs = this.getLinkAttributes();
-                var cm = MadeUtils.MarkDownEditor.CodeMirror;
-                // (link_text)(link_address "link_title")
-
-                if(attrs.href){
-
-                    var strText = '';
-
-                    if(attrs.target && attrs.target == '_blank') {
-                        strText += '<a href="'+attrs.href+'" target="'+attrs.target+'" title="'+attrs.title+'">';
-                        strText += (attrs.text ? attrs.text : 'Your text to link here...');
-                        strText += '</a>';
-                    } else {
-                        strText += '['+(attrs.text ? attrs.text : 'Your text to link here...')+']';
-                        strText += '(' + attrs.href;
-
-                        if(attrs.title)
-                            strText += ' "' + attrs.title + '"';
-                        strText += ')'
-                    }
-                    cm.replaceSelection( strText );
-                    this.getDialog().close();
-                }
-
-                return false;
+                return handleLinkFormSubmission(this);
             },
 
             resetFields: function() {

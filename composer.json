@@ -37,5 +37,10 @@
     },
     "extra": {
         "installer-name": "markdown"
+    },
+    "autoload": {
+        "psr-4": {
+            "MadeHQ\\Markdown\\": "code/"
+        }
     }
 }

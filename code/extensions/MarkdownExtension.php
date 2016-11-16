@@ -1,4 +1,14 @@
 <?php
+
+namespace MadeHQ\Markdown\Extensions;
+
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HTMLEditor\HtmlEditorField;
+
 /**
  * Created by Nivanka Fonseka (nivanka@silverstripers.com).
  * User: nivankafonseka
@@ -6,7 +16,6 @@
  * Time: 8:47 AM
  * To change this template use File | Settings | File Templates.
  */
-
 class MarkdownExtension extends DataExtension {
 
     private static $replace_html_fields = true;
@@ -47,7 +56,7 @@ class MarkdownExtension extends DataExtension {
                 foreach ($db as $field => $type) {
                     if (strpos($type, 'HTMLText') !== false) {
                         $updated = true;
-                        $db[$field] = str_replace($type, 'HTMLText', 'MarkdownText');
+                        $db[$field] = str_replace($type, 'HTMLText', 'MadeHQ\Markdown\Model\MarkdownText');
                     }
                     if (strpos($type, 'HTMLVarchar') !== false) {
                         $updated = true;
@@ -83,4 +92,4 @@ class MarkdownExtension extends DataExtension {
     }
 
 
-} 
+}

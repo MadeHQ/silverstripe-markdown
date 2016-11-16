@@ -1,4 +1,12 @@
 <?php
+
+namespace MadeHQ\Markdown\Model;
+
+use MadeHQ\Markdown\Forms\MarkdownEditorField;
+use SilverStripe\ORM\FieldType\DBVarchar;
+use SilverStripe\View\Parsers\ShortcodeParser;
+use SilverStripe\Forms\TextField;
+
 /**
  * Created by Nivanka Fonseka (nivanka@silverstripers.com).
  * User: nivankafonseka
@@ -7,10 +15,10 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class MarkdownVarchar extends Varchar {
+class MarkdownVarchar extends DBVarchar {
 
 	function forTemplate(){
-		$parser = new Parsedown();
+		$parser = new \Parsedown();
 		$value = ShortcodeParser::get_active()->parse($this->value);
 		return $parser->text($value);
 	}
@@ -23,4 +31,4 @@ class MarkdownVarchar extends Varchar {
 		return new TextField($this->name, $title);
 	}
 
-} 
+}

@@ -1,4 +1,13 @@
 <?php
+
+namespace MadeHQ\Markdown\Extensions;
+
+use MadeHQ\Markdown\Forms\MarkdownEditorField;
+
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\View\SSViewer_FromString;
+use SilverStripe\Forms\FieldList;
+
 /**
  * Class MarkdownSiteTreeExtension
  *
@@ -7,6 +16,10 @@
  */
 class MarkdownSiteTreeExtension extends DataExtension
 {
+    public function updateCMSFields(FieldList $fields)
+    {
+        $fields->replaceField('Content', MarkdownEditorField::create('Content'));
+    }
 
     /**
      * Content
@@ -22,9 +35,5 @@ class MarkdownSiteTreeExtension extends DataExtension
 		}
 		$template = SSViewer_FromString::fromString($strContent);
 		return $this->owner->renderWith($template);
-
     }
-
-
-
 }

@@ -1,6 +1,4 @@
 
-
-
 .markdowneditor .middleColumn {
     border: none;
 }
@@ -89,18 +87,32 @@ DEPRECATED
 }
 
 .markdowneditorfield-dialog .cms-content-header {
+    height: 53px;
+    margin-bottom: 0;
     padding: 0;
     width: 100%;
-    height: 40px;
+}
+.ss-insert-link::after,
+.markdowneditorfield-dialog .cms-content-header::after {
+    display: none;
 }
 
-.markdowneditorfield-dialog .cms-content-header h3 {
+/*.markdowneditorfield-dialog .cms-content-header h3 {
     padding: 0 8px;
     margin: 10px;
+}*/
+.markdowneditorfield-dialog .cms-content-header h3 {
+    padding: 12px 0 12px 1.5385rem;
+    margin: 0;
+    line-height: 28px;
+    display: inline-block;
+    font-weight: 400;
 }
 
-.markdowneditorfield-dialog .ss-insert-media, .markdowneditorfield-dialog .Actions, .markdowneditorfield-dialog .ss-insert-link {
-    padding: 8px 16px;
+/*.markdowneditorfield-dialog .ss-insert-media, .markdowneditorfield-dialog .Actions, .markdowneditorfield-dialog .ss-insert-link {*/
+.ss-insert-link {
+    padding-left: 1.5385rem;
+    padding-right: 1.5385rem;
 }
 
 .markdowneditorfield-dialog .CompositeField .text select {

@@ -1,5 +1,12 @@
 <?php
 
+namespace MadeHQ\Markdown\Extensions;
+
+use MadeHQ\Markdown\Forms\MarkdownEditorField;
+use MadeHQ\Markdown\Forms\MarkdownEditorField_Toolbar;
+use SilverStripe\Core\Extension;
+use SilverStripe\View\Requirements;
+
 class MarkdownLeftAndMainExtension extends Extension {
 
 	public function init(){
@@ -15,4 +22,4 @@ class MarkdownLeftAndMainExtension extends Extension {
         return MarkdownEditorField_Toolbar::create($this, "EditorToolbar");
     }
 
-} 
+}

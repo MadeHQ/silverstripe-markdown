@@ -1,12 +1,20 @@
 <?php
+
+namespace MadeHQ\Markdown\Forms;
+
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\View\Requirements;
+use SilverStripe\Control\RequestHandler;
+use SilverStripe\Control\Controller;
+
 /**
  * Class MarkdownField
  *
  * @package markdown
  * @subpackage forms
  */
-class MarkdownEditorField extends TextareaField {
-
+class MarkdownEditorField extends TextareaField
+{
     /**
      * @var int $rows Number of rows in textarea element.
      */
@@ -19,7 +27,7 @@ class MarkdownEditorField extends TextareaField {
 
 		$this->include_js();
 		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/font-awesome-4.3.0/css/font-awesome.min.css');
-		Requirements::css(MARKDOWN_MODULE_BASE . '/css/MarkdownEditor.css');
+		Requirements::css(MARKDOWN_MODULE_BASE . '/admin/css/MarkdownEditor.css');
 		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.css');
 
 		if(0 && Director::isDev()){
@@ -32,7 +40,6 @@ class MarkdownEditorField extends TextareaField {
 		}
 		Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkdownEditorField.js');
         Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkDownShortCode.js');
-
 
         $this->extend("updateFieldHolder");
         return parent::FieldHolder($properties);
@@ -63,10 +70,6 @@ class MarkdownEditorField extends TextareaField {
 		$attributes['configs'] = $this->editorConfigs;
 		return $attributes;
 	}
-
-
-
-
 }
 
 

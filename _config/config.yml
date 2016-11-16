@@ -1,27 +1,33 @@
 ---
 Name: markdown
-After: 'framework/*','cms/*'
+After:
+    - framework/*
+    - cms/*
 ---
 # YAML configuration for SilverStripe
 # See http://doc.silverstripe.org/framework/en/topics/configuration
 # Caution: Indentation through two spaces, not tabs
 
-DataObject:
+SilverStripe\ORM\DataObject:
   extensions:
-    - MarkdownExtension
+    - MadeHQ\Markdown\Extensions\MarkdownExtension
 
 MarkdownCloudinaryUpload:
   enable: true
 
-LeftAndMain:
+SilverStripe\CMS\Model\SiteTree:
   extensions:
-    - MarkdownLeftAndMainExtension
+    - MadeHQ\Markdown\Extensions\MarkdownSiteTreeExtension
 
-Director:
+SilverStripe\Admin\LeftAndMain:
+  extensions:
+    - MadeHQ\Markdown\Extensions\MarkdownLeftAndMainExtension
+
+SilverStripe\Control\Director:
   rules:
-    'cloudinary-upload//$Action': 'MarkdownCloudinaryUpload_Controller'
+    'cloudinary-upload//$Action': 'MadeHQ\Markdown\Extensions\MarkdownCloudinaryUpload_Controller'
 
-MarkdownEditorConfig:
+MadeHQ\Markdown\Forms\MarkdownEditorConfig:
   button_configs:
     "|": "|"
     header-1:

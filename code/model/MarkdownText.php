@@ -1,4 +1,14 @@
 <?php
+
+namespace MadeHQ\Markdown\Model;
+
+use MadeHQ\Markdown\Forms\MarkdownEditorField;
+
+use SilverStripe\ORM\FieldType\DBText;
+use SilverStripe\View\Parsers\ShortcodeParser;
+use SilverStripe\Forms\TextField;
+use SilverStripe\CoreConvert;
+
 /**
  * Created by Nivanka Fonseka (nivanka@silverstripers.com).
  * User: nivankafonseka
@@ -6,8 +16,7 @@
  * Time: 8:40 AM
  * To change this template use File | Settings | File Templates.
  */
-
-class MarkdownText extends Text {
+class MarkdownText extends DBText {
 
 	private static $casting = array(
 		"BigSummary" => "HTMLText",
@@ -33,7 +42,7 @@ class MarkdownText extends Text {
 	}
 
 	function ParseMarkDown(){
-		$parser = new Parsedown();
+		$parser = new \Parsedown();
 		$value = $this->value;
 		$this->extend('onBeforeParseMarkDown', $value);
 		$value = $parser->text($value);
@@ -41,7 +50,7 @@ class MarkdownText extends Text {
 		try {
 			$value = ShortcodeParser::get_active()->parse($value);
 		}
-		catch(Exception $e){}
+		catch(\Exception $e){}
 		restore_error_handler();
 		$this->extend('onAfterParseMarkDown', $value);
 		return $value;
@@ -191,4 +200,4 @@ class MarkdownText extends Text {
 		return $this->Summary(20);
 	}
 
-} 
+}
