@@ -7,6 +7,7 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
 use SilverStripe\Core\Extension;
 use SilverStripe\View\Requirements;
+use SilverStripe\View\SSViewer;
 
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FieldList;
@@ -38,6 +39,23 @@ class MarkdownCloudinaryUpload_Controller extends Controller
         'ImageForm',
         'getImageTag'
     );
+
+    /**
+     * Assign themes to use for cms
+     *
+     * @config
+     * @var array
+     */
+    private static $admin_themes = [
+        'silverstripe/framework:/admin/themes/cms-forms',
+        SSViewer::DEFAULT_THEME,
+    ];
+
+    protected function init()
+    {
+        parent::init();
+        SSViewer::set_themes($this->config()->admin_themes);
+    }
 
     public function Image()
     {
