@@ -7,7 +7,7 @@ use MadeHQ\Markdown\Forms\MarkdownEditorField;
 use SilverStripe\ORM\FieldType\DBText;
 use SilverStripe\View\Parsers\ShortcodeParser;
 use SilverStripe\Forms\TextField;
-use SilverStripe\CoreConvert;
+use SilverStripe\Core\Convert;
 
 /**
  * Created by Nivanka Fonseka (nivanka@silverstripers.com).
@@ -73,12 +73,17 @@ class MarkdownText extends DBText {
 	}
 
 
-	public function BigSummary($maxWords = 50, $plain = true) {
+	public function BigSummary($maxWords = 50, $plain = true, $config = null) {
 		$result = '';
 
 		// get first sentence?
 		// this needs to be more robust
-		$data = $plain ? Convert::xml2raw($this->ParseMarkDown(), true) : $this->ParseMarkDown();
+		$data = $this->ParseMarkDown();
+
+		if ($plain) {
+			$data = Convert::html2raw($data, true, 0, $config);
+		}
+
 		if(!$data) return '';
 
 		$sentences = explode('.', $data);
