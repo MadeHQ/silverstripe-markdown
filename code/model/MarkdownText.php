@@ -42,7 +42,7 @@ class MarkdownText extends DBText {
 	}
 
 	function ParseMarkDown(){
-		$parser = new \Parsedown();
+		$parser = new \ParsedownExtra();
 		$value = $this->value;
 		$this->extend('onBeforeParseMarkDown', $value);
 		$value = $parser->text($value);

@@ -18,7 +18,7 @@ use SilverStripe\Forms\TextField;
 class MarkdownVarchar extends DBVarchar {
 
 	function forTemplate(){
-		$parser = new \Parsedown();
+		$parser = new \ParsedownExtra();
 		$value = ShortcodeParser::get_active()->parse($this->value);
 		return $parser->text($value);
 	}
