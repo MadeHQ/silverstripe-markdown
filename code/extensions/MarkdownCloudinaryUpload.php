@@ -17,6 +17,13 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
         'getImageTag'
     );
 
+    private static $no_alignment_text = 'None';
+
+    private static $alignments = array(
+        'inline-image--align-left' => 'Left',
+        'inline-image--align-right' => 'Right',
+    );
+
     public function Image()
     {
         return new CloudinaryImage();
@@ -56,7 +63,12 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
                     ),
                     NumericField::create('Width'),
                     NumericField::create('Height'),
-                    TextField::create('AltText')->setTitle('Alternate Text')
+                    TextField::create('AltText')->setTitle('Alternate Text'),
+                    DropdownField::create('Class')
+                        ->setTitle('Alignment')
+                        ->setSource(Config::inst()->get('MarkdownCloudinaryUpload_Controller', 'alignments'))
+                        ->setHasEmptyDefault(true)
+                        ->setEmptyString(Config::inst()->get('MarkdownCloudinaryUpload_Controller', 'no_alignment_text'))
                 )
             ),
             new FieldList(
@@ -80,37 +92,38 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
      *
      * @return string
      */
-    public function getImageTag(){
+    public function getImageTag(SS_HTTPRequest $request)
+    {
         $strRet = '';
-        $arrPieces = array('cloudinary_image');
 
-        if(isset($_POST['Image']) && ($image = $_POST['Image'])) {
-            $arrPieces[] = "id='".CloudinaryUtils::public_id($image['URL'])."'";
-
-            if(!empty($_POST['Width'])) {
-                $arrPieces[] = "width=" . $_POST['Width'];
-            }
-
-            if(!empty($_POST['Height'])) {
-                $arrPieces[] = "height=" . $_POST['Height'];
-            }
-
-            if(!empty($image['Credit'])) {
-                $arrPieces[] = "credit='" . $image['Credit']."'";
-            }
-
-            if(!empty($image['Caption'])) {
-                $arrPieces[] = "caption='" . $image['Caption']."'";
-            }
-
-            $arrPieces[] = "gravity='" . $image['Gravity']."'";
-
-            if(!empty($_POST['AltText'])) {
-                $arrPieces[] = "alt='".$_POST['AltText']."'";
-            }
-
-            $strRet = '['. implode(', ', $arrPieces) . ']';
+        if (!($image = $request->postVar('Image')) || !isset($image['URL']) || !$image['URL']) {
+            return false;
         }
+        $arrPieces = array(
+            'cloudinary_image',
+            sprintf('id=%s', CloudinaryUtils::public_id($image['URL'])),
+            sprintf('gravity=%s', $image['Gravity']),
+        );
+        if ($request->postVar('Width')) {
+            $arrPieces[] = sprintf('width=%d', $request->postVar('Width'));
+        }
+        if ($request->postVar('Height')) {
+            $arrPieces[] = sprintf('height=%d', $request->postVar('Height'));
+        }
+        if (isset($image['Credit']) && $image['Credit']) {
+            $arrPieces[] = sprintf('credit=%s', $image['Credit']);
+        }
+        if (isset($image['Caption']) && $image['Caption']) {
+            $arrPieces[] = sprintf('caption=%s', $image['Caption']);
+        }
+        if ($request->postVar('AltText')) {
+            $arrPieces[] = sprintf('alt=%s', $request->postVar('AltText'));
+        }
+        if ($request->postVar('Class')) {
+            $arrPieces[] = sprintf('class=%s', $request->postVar('Class'));
+        }
+
+        $strRet = '['. implode(', ', $arrPieces) . ']';
 
         return Convert::array2json(array(
             'Markdown'  => $strRet

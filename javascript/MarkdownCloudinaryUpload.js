@@ -85,7 +85,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                 dataType    : 'json',
                 type        : 'POST',
                 success     : function(data){
-                    if(data.Markdown) {
+                    if(data && data.Markdown) {
                         var cm = MadeUtils.CloudinaryMarkdown.CodeMirror;
                         cm.replaceSelection( data.Markdown );
                         self.getDialog().close();
@@ -102,4 +102,3 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
     });
 
 })(jQuery);
-
