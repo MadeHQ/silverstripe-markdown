@@ -111,16 +111,16 @@ class MarkdownCloudinaryUpload_Controller extends Controller {
             $arrPieces[] = sprintf('height=%d', $request->postVar('Height'));
         }
         if (isset($image['Credit']) && $image['Credit']) {
-            $arrPieces[] = sprintf('credit=%s', $image['Credit']);
+            $arrPieces[] = sprintf('credit=\'%s\'', $image['Credit']);
         }
         if (isset($image['Caption']) && $image['Caption']) {
-            $arrPieces[] = sprintf('caption=%s', $image['Caption']);
+            $arrPieces[] = sprintf('caption=\'%s\'', $image['Caption']);
         }
         if ($request->postVar('AltText')) {
-            $arrPieces[] = sprintf('alt=%s', $request->postVar('AltText'));
+            $arrPieces[] = sprintf('alt=\'%s\'', $request->postVar('AltText'));
         }
         if ($request->postVar('Class')) {
-            $arrPieces[] = sprintf('class=%s', $request->postVar('Class'));
+            $arrPieces[] = sprintf('class=\'%s\'', $request->postVar('Class'));
         }
 
         $strRet = '['. implode(', ', $arrPieces) . ']';
