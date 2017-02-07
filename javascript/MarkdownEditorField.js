@@ -2,16 +2,14 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
 
 (function($) {
     function handleLinkFormSubmission(form) {
-        console.log(form);
-debugger;
         var attrs = form.getLinkAttributes();
         var cm = MadeUtils.MarkDownEditor.CodeMirror;
-        // (link_text)(link_address "link_title")
+        if (!attrs.text) {
+            attrs.text = cm.getSelection();
+        }
 
         if(attrs.href){
-
             var strText = '';
-
             if(attrs.target && attrs.target == '_blank') {
                 strText += '<a href="'+attrs.href+'" target="'+attrs.target+'" title="'+attrs.title+'">';
                 strText += (attrs.text ? attrs.text : 'Your text to link here...');
@@ -25,7 +23,6 @@ debugger;
                 strText += ')'
             }
             cm.replaceSelection( strText );
-            form.getDialog().close();
         }
 
         return false;
@@ -66,16 +63,14 @@ debugger;
                                             'Insert'
                                         ),
                                         'data-icon': 'accept',
-                                        class: 'ss-ui-action-constructive media-insert',
+                                        class: 'btn btn-primary media-insert',
                                         click: function() {
                                             handleLinkFormSubmission($(dialog).find('form'));
-// console.log(dialog, $(dialog).find('form'));
-                                            // $(dialog).find('form').trigger('submit');
+                                            $(dialog).close();
                                         }
                                     }
                                 }
                             });
-                            // dialog.trigger('ssdialogopen');
                         }
                     });
                 }
@@ -86,7 +81,6 @@ debugger;
                 var codeMirror = MadeUtils.MarkDownEditor.CodeMirror;
                 var strText = codeMirror.getSelection();
                 var regex = /\".*\":.*/;
-
 
                 dialog.find('.field#LinkText').find('input').val('');
                 dialog.find('.field#Description').find('input').val('');
@@ -341,16 +335,14 @@ debugger;
                 }
                 cm.focus();
             }
-
         };
 
         $('.markdowneditorfield-dialog').entwine({
             onadd: function() {
-            // Create jQuery dialog
-            if (!this.is('.ui-dialog-content')) {
-                this.ssdialog({autoOpen: true});
-            }
-
+                // Create jQuery dialog
+                if (!this.is('.ui-dialog-content')) {
+                    this.ssdialog({autoOpen: true});
+                }
                 this._super();
             },
 
@@ -374,11 +366,9 @@ debugger;
             }
         });
 
-
         /**
          *
          */
-
         $('form.markdowneditorfield-linkform input[name=LinkType]').entwine({
             onclick: function(e) {
                 this.parents('form:first').redraw();
@@ -415,31 +405,23 @@ debugger;
         });
 
         $('form.markdowneditorfield-linkform').entwine({
-
             onadd: function(){
                 this.redraw()
             },
-
             getDialog: function(){
                 return this.closest('.markdowneditorfield-dialog');
             },
-
             onsubmit: function(e) {
                 return handleLinkFormSubmission(this);
             },
-
             resetFields: function() {
                 this._super();
-
                 // Reset the form using a native call. This will also correctly reset checkboxes and radio buttons.
                 this[0].reset();
             },
-
             redraw: function() {
                 this._super();
-
                 var linkType = this.find(':input[name=LinkType]:checked').val();
-
                 this.addAnchorSelector();
 
                 // Toggle field visibility depending on the link type.
@@ -451,8 +433,6 @@ debugger;
                 if(linkType == 'anchor') this.find('.field#Form_EditorToolbarLinkForm_Anchor_Holder').show();
                 this.find('.field#Form_EditorToolbarLinkForm_Description_Holder').show();
                 this.find('.field#Form_EditorToolbarLinkForm_LinkText_Holder').show();
-
-
             },
 
             /**
@@ -487,7 +467,6 @@ debugger;
                         if(href.indexOf('://') == -1) href = 'http://' + href;
                         break;
                 }
-
                 return {
                     href : href,
                     target : target,
@@ -495,7 +474,6 @@ debugger;
                     text : this.find(':input[name=LinkText]').val()
                 };
             },
-
 
             /**
              * Builds an anchor selector element and injects it into the DOM next to the anchor field.
