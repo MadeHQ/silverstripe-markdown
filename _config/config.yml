@@ -2,7 +2,6 @@
 Name: markdown
 After:
     - framework/*
-    - cms/*
 ---
 # YAML configuration for SilverStripe
 # See http://doc.silverstripe.org/framework/en/topics/configuration
