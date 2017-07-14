@@ -1,9 +1,9 @@
 # SimpleMDE - Markdown Editor
 A drop-in JavaScript textarea replacement for writing beautiful and understandable markdown. The WYSIWYG-esque editor allows users to modify the markdown with toolbar buttons and shortcuts. WYSIWYG editors that produce HTML are often complex and buggy. Markdown solves this problem in many ways, but is less visually clear while editing. SimpleMDE has been designed to bridge this gap for non-technical users who are less familiar with or just learning markdown syntax.
 
-[Demo](http://nextstepwebs.github.io/simplemde-markdown-editor)
+[Demo](https://simplemde.com/markdown-guide)
 
-[![Preview](http://i.imgur.com/b9hFHFT.png)](http://nextstepwebs.github.io/simplemde-markdown-editor)
+[![Preview](http://i.imgur.com/b9hFHFT.png)](https://simplemde.com/markdown-guide)
 
 ## Quick start
 SimpleMDE is available on [jsDelivr](http://www.jsdelivr.com/#!simplemde). Font Awesome is available on MaxCDN. *Please note, jsDelivr may take a few days to update to the latest release.*
@@ -101,7 +101,7 @@ link | drawLink | fa fa-link | Create Link (Ctrl+K)
 image | drawImage | fa fa-picture-o | Insert Image (Ctrl+Alt+I)
 horizontal-rule | drawHorizontalRule | fa fa-minus | Insert Horizontal Line
 preview | togglePreview | fa fa-eye | Toggle Preview (Ctrl+P)
-guide | [This link](http://nextstepwebs.github.io/simplemde-markdown-editor/markdown-guide) | fa fa-question-circle | Markdown Guide
+guide | [This link](https://simplemde.com/markdown-guide) | fa fa-question-circle | Markdown Guide
 
 Customize the toolbar using the `toolbar` option like:
 
