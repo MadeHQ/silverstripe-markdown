@@ -100,8 +100,19 @@ class MarkdownEditorField_Toolbar extends RequestHandler {
         );
     }
 
+    /**
+     * Searches the SiteTree for display in the dropdown
+     *
+     * @return callback
+     */
+    public function siteTreeSearchCallback($sourceObject, $labelField, $search) {
+        return DataObject::get($sourceObject)->filterAny(array(
+            'MenuTitle:PartialMatch' => $search,
+            'Title:PartialMatch' => $search
+        ));
+    }
+
     public function LinkForm(){
-//        echo 'ssss';die();
         $siteTree = new TreeDropdownField('internal', _t('HtmlEditorField.PAGE', "Page"),
             'SiteTree', 'ID', 'MenuTitle', true);
         // mimic the SiteTree::getMenuTitle(), which is bypassed when the search is performed
