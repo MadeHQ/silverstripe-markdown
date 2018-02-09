@@ -12,6 +12,9 @@
 .markdowneditor .CodeMirror {
     background: #FFFFFF;
 }
+.markdowneditor .CodeMirror-scroll {
+    min-height: 0;
+}
 
 .markdowneditor .editor-toolbar .fa.h1:after {
     content: "1";
