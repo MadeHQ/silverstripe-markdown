@@ -18,7 +18,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                     var pageId = $('.cms-edit-form :input[name=ID]').val();
                     postdata.PageId = pageId
                 }
-                var url = 'ShortcodableController/ShortcodeForm/forTemplate';
+                var url = 'admin/shortcodable/ShortcodeForm/forTemplate';
                 $.post(url, postdata, function(data){
                     dialog.removeClass('loading');
                     dialog.html(data);
@@ -54,8 +54,3 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
         });
     });
 })(jQuery);
-
-
-
-
-
