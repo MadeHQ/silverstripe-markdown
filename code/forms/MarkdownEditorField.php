@@ -25,9 +25,7 @@ class MarkdownEditorField extends TextareaField {
 		if(0 && Director::isDev()){
 			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/sourcefiles/codemirror/codemirror.js');
 			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/sourcefiles/simplemde.js');
-		}
-		else{
-
+		} else {
 			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.js');
 		}
 		Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkdownEditorField.js');
