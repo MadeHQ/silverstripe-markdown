@@ -36,7 +36,9 @@
         "composer/installers": "*"
     },
     "extra": {
-        "installer-name": "markdown"
+        "expose": [
+            "client/dist"
+        ]
     },
     "autoload": {
         "psr-4": {

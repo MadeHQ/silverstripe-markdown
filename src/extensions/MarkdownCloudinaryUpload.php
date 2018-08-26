@@ -28,8 +28,10 @@ class MarkdownCloudinaryUpload extends Extension
      */
     public function updateFieldHolder()
     {
-        if(Config::inst()->get('MarkdownCloudinaryUpload', 'enable') == true) {
-            Requirements::javascript('markdown/javascript/MarkdownCloudinaryUpload.js');
+        if (Config::inst()->get('MarkdownCloudinaryUpload', 'enable') == true) {
+            Requirements::javascript(
+                'mademedia/silverstripe-markdown:client/dist/js/MarkdownCloudinaryUpload.js'
+            );
         }
     }
 }
