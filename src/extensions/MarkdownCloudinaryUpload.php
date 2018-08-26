@@ -30,7 +30,7 @@ class MarkdownCloudinaryUpload extends Extension
     {
         if (Config::inst()->get('MarkdownCloudinaryUpload', 'enable') == true) {
             Requirements::javascript(
-                'mademedia/silverstripe-markdown:client/dist/js/MarkdownCloudinaryUpload.js'
+                MARKDOWN_MODULE_BASE . ':client/js/MarkdownCloudinaryUpload.js'
             );
         }
     }
