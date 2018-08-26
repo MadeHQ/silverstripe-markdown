@@ -1,7 +1,7 @@
 {
     "name": "mademedia/silverstripe-markdown",
     "description": "SilverStripe Module. Replaces TinyMCE editor with a Markdown editor.",
-    "type": "silverstripe-module",
+    "type": "silverstripe-vendormodule",
     "keywords": ["silverstripe", "markdown"],
     "homepage": "http://www.mademedia.co.uk",
     "time": "2015-07-19 12:15:00",
@@ -40,7 +40,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MadeHQ\\Markdown\\": "code/"
+            "MadeHQ\\Markdown\\": "src/"
         }
     }
 }
