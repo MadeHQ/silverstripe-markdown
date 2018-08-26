@@ -2,11 +2,13 @@
 
 namespace MadeHQ\Markdown\Extensions;
 
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Config\Config;
+use MadeHQ\Markdown\Model\MarkdownText;
+use MadeHQ\Markdown\Model\MarkdownVarchar;
 use SilverStripe\Forms\HTMLEditor\HtmlEditorField;
 
 /**
@@ -47,31 +49,39 @@ class MarkdownExtension extends DataExtension
         return self::$db_field_cache[$class];
     }
 
-
     public static function get_extra_config($class, $extension, $args)
     {
-        if(!self::$replace_html_fields) { return array();
+        if (!self::$replace_html_fields) {
+            return array();
         }
-        if(self::$disable_markdown_fields) { return array();
+        if (self::$disable_markdown_fields) {
+            return array();
         }
-
-        $config = Config::inst();
+        
         // Merge all config values for subclasses
         foreach (ClassInfo::subclassesFor($class) as $subClass) {
-            if($db = self::get_db_fields_for_class($subClass)) {
+            if ($db = self::get_db_fields_for_class($subClass)) {
                 $updated = false;
                 foreach ($db as $field => $type) {
                     if (strpos($type, 'HTMLText') !== false) {
                         $updated = true;
-                        $db[$field] = str_replace($type, 'HTMLText', 'MadeHQ\Markdown\Model\MarkdownText');
+                        $db[$field] = str_replace(
+                            'HTMLText',
+                            MarkdownText::class,
+                            $type
+                        );
                     }
                     if (strpos($type, 'HTMLVarchar') !== false) {
                         $updated = true;
-                        $db[$field] = str_replace($type, 'HTMLVarchar', 'MarkdownVarchar');
+                        $db[$field] = str_replace(
+                            'HTMLVarchar',
+                            MarkdownVarchar::class,
+                            $type
+                        );
                     }
                 }
                 if ($updated) {
-                    $config->update($subClass, 'db', $db);
+                    Config::modify()->merge($subClass, 'db', $db);
                 }
             }
         }
