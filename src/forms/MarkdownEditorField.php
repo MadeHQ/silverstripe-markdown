@@ -10,7 +10,7 @@ use SilverStripe\Control\Controller;
 /**
  * Class MarkdownField
  *
- * @package markdown
+ * @package    markdown
  * @subpackage forms
  */
 class MarkdownEditorField extends TextareaField
@@ -20,60 +20,67 @@ class MarkdownEditorField extends TextareaField
      */
     protected $rows = 20;
 
-	private $editorConfigs = 'default';
+    private $editorConfigs = 'default';
 
-    public function FieldHolder($properties = array()) {
+    public function FieldHolder($properties = array()) 
+    {
         $this->extraClasses['stacked'] = 'stacked';
 
-		$this->include_js();
-		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/font-awesome-4.3.0/css/font-awesome.min.css');
-		Requirements::css(MARKDOWN_MODULE_BASE . '/admin/css/MarkdownEditor.css');
-		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.css');
+        $this->include_js();
+        Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/font-awesome-4.3.0/css/font-awesome.min.css');
+        Requirements::css(MARKDOWN_MODULE_BASE . '/admin/css/MarkdownEditor.css');
+        Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.css');
 
-		if(0 && Director::isDev()){
-			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/sourcefiles/codemirror/codemirror.js');
-			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/sourcefiles/simplemde.js');
-		}
-		else{
+        if(0 && Director::isDev()) {
+            Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/sourcefiles/codemirror/codemirror.js');
+            Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/sourcefiles/simplemde.js');
+        }
+        else{
 
-			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.js');
-		}
-		Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkdownEditorField.js');
+            Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.js');
+        }
+        Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkdownEditorField.js');
         Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkDownShortCode.js');
 
         $this->extend("updateFieldHolder");
         return parent::FieldHolder($properties);
     }
 
-	public function setEditorConfigs($editorConfigs){
-		$this->editorConfigs = $editorConfigs;
-	}
+    public function setEditorConfigs($editorConfigs)
+    {
+        $this->editorConfigs = $editorConfigs;
+    }
 
-	function getEditorConfigs(){
-		return $this->editorConfigs;
-	}
+    function getEditorConfigs()
+    {
+        return $this->editorConfigs;
+    }
 
-	public function include_js() {
-		$configObj = MarkdownEditorConfig::get($this->editorConfigs);
-		Requirements::insertHeadTags('<script>var markdownEditorConfigs = {};</script>', 'MarkdownEditorConfigHolder');
-		Requirements::insertHeadTags('<script>' . $configObj->generateJS() . '</script>', 'MarkdownEditorConfig_' . $this->editorConfigs);
-	}
+    public function include_js() 
+    {
+        $configObj = MarkdownEditorConfig::get($this->editorConfigs);
+        Requirements::insertHeadTags('<script>var markdownEditorConfigs = {};</script>', 'MarkdownEditorConfigHolder');
+        Requirements::insertHeadTags('<script>' . $configObj->generateJS() . '</script>', 'MarkdownEditorConfig_' . $this->editorConfigs);
+    }
 
-	public static function include_default_js(){
-		$configObj = MarkdownEditorConfig::get('default');
-		Requirements::insertHeadTags('<script>var markdownEditorConfigs = {};</script>', 'MarkdownEditorConfigHolder');
-		Requirements::insertHeadTags('<script>' . $configObj->generateJS() . '</script>', 'MarkdownEditorConfig_default');
-	}
+    public static function include_default_js()
+    {
+        $configObj = MarkdownEditorConfig::get('default');
+        Requirements::insertHeadTags('<script>var markdownEditorConfigs = {};</script>', 'MarkdownEditorConfigHolder');
+        Requirements::insertHeadTags('<script>' . $configObj->generateJS() . '</script>', 'MarkdownEditorConfig_default');
+    }
 
-	function getAttributes(){
-		$attributes = parent::getAttributes();
-		$attributes['configs'] = $this->editorConfigs;
-		return $attributes;
-	}
+    function getAttributes()
+    {
+        $attributes = parent::getAttributes();
+        $attributes['configs'] = $this->editorConfigs;
+        return $attributes;
+    }
 }
 
 
-class MarkdownEditorField_Toolbar extends RequestHandler {
+class MarkdownEditorField_Toolbar extends RequestHandler
+{
 
     private static $allowed_actions = array(
         'LinkForm',
@@ -89,24 +96,29 @@ class MarkdownEditorField_Toolbar extends RequestHandler {
 
     protected $controller, $name;
 
-    public function __construct($controller, $name) {
+    public function __construct($controller, $name) 
+    {
         parent::__construct();
 
         $this->controller = $controller;
         $this->name = $name;
     }
 
-    public function forTemplate() {
+    public function forTemplate() 
+    {
         return sprintf(
             '<div id="cms-editor-dialogs" data-url-linkform="%s" ></div>',
             Controller::join_links($this->controller->Link(), $this->name, 'LinkForm', 'forTemplate')
         );
     }
 
-    public function LinkForm(){
-//        echo 'ssss';die();
-        $siteTree = new TreeDropdownField('internal', _t('HtmlEditorField.PAGE', "Page"),
-            'SiteTree', 'ID', 'MenuTitle', true);
+    public function LinkForm()
+    {
+        //        echo 'ssss';die();
+        $siteTree = new TreeDropdownField(
+            'internal', _t('HtmlEditorField.PAGE', "Page"),
+            'SiteTree', 'ID', 'MenuTitle', true
+        );
         // mimic the SiteTree::getMenuTitle(), which is bypassed when the search is performed
         $siteTree->setSearchFunction(array($this, 'siteTreeSearchCallback'));
 
@@ -119,8 +131,10 @@ class MarkdownEditorField_Toolbar extends RequestHandler {
                 $headerWrap = new CompositeField(
                     new LiteralField(
                         'Heading',
-                        sprintf('<h3 class="htmleditorfield-mediaform-heading insert">%s</h3>',
-                            _t('HtmlEditorField.LINK', 'Insert Link'))
+                        sprintf(
+                            '<h3 class="htmleditorfield-mediaform-heading insert">%s</h3>',
+                            _t('HtmlEditorField.LINK', 'Insert Link')
+                        )
                     )
                 ),
                 $contentComposite = new CompositeField(
@@ -135,7 +149,8 @@ class MarkdownEditorField_Toolbar extends RequestHandler {
                         ),
                         'internal'
                     ),
-                    new LiteralField('Step2',
+                    new LiteralField(
+                        'Step2',
                         '<div class="step2">'
                         . sprintf($numericLabelTmpl, '2', _t('HtmlEditorField.DETAILS', 'Details')) . '</div>'
                     ),
@@ -146,8 +161,10 @@ class MarkdownEditorField_Toolbar extends RequestHandler {
                     new TextField('Anchor', _t('MarkdownEditorField.ANCHORVALUE', 'Anchor')),
                     new TextField('LinkText', _t('MarkdownEditorField.LINKTEXT', 'Link text')),
                     new TextField('Description', _t('MarkdownEditorField.LINKDESCR', 'Link title')),
-                    new CheckboxField('TargetBlank',
-                        _t('MarkdownEditorField.LINKOPENNEWWIN', 'Open link in a new window?')),
+                    new CheckboxField(
+                        'TargetBlank',
+                        _t('MarkdownEditorField.LINKOPENNEWWIN', 'Open link in a new window?')
+                    ),
                     new HiddenField('Locale', null, $this->controller->Locale)
                 )
             ),
@@ -178,7 +195,8 @@ class MarkdownEditorField_Toolbar extends RequestHandler {
      * @return string
      * @throws SS_HTTPResponse_Exception
      */
-    public function getanchors() {
+    public function getanchors() 
+    {
         $id = (int)$this->request->getVar('PageID');
         $anchors = array();
 

@@ -13,25 +13,29 @@ use SilverStripe\Core\Config\Config;
  * To change this template use File | Settings | File Templates.
  */
 
-class MarkdownEditorConfig {
+class MarkdownEditorConfig
+{
 
-	private static $configs = array();
+    private static $configs = array();
 
-	private $identifier = '';
+    private $identifier = '';
 
-	protected $plugins = array(
-		'spellchecker',
-		'autosave',
-	);
+    protected $plugins = array(
+    'spellchecker',
+    'autosave',
+    );
 
-	public function __construct($identifier){
-		$this->identifier = $identifier;
-	}
+    public function __construct($identifier)
+    {
+        $this->identifier = $identifier;
+    }
 
-	public static function get($identifier = 'default') {
-		if (!array_key_exists($identifier, self::$configs)) self::$configs[$identifier] = new MarkdownEditorConfig($identifier);
-		return self::$configs[$identifier];
-	}
+    public static function get($identifier = 'default') 
+    {
+        if (!array_key_exists($identifier, self::$configs)) { self::$configs[$identifier] = new MarkdownEditorConfig($identifier);
+        }
+        return self::$configs[$identifier];
+    }
 
     protected function getButtons()
     {
@@ -43,29 +47,30 @@ class MarkdownEditorConfig {
         return Config::inst()->get('MadeHQ\Markdown\Forms\MarkdownEditorConfig', 'button_configs');
     }
 
-	public function generateJS(){
-		$arrConfigs = array(
-			'status'			=> array(
-				'lines',
-				'words',
-				'cursor'
-			),
-			'toolbar'			=> array()
-		);
-		$buttonConfigs = $this->getButtonConfigs();
-		foreach($this->getButtons() as $button){
-			if(array_key_exists($button, $buttonConfigs)){
-				$arrConfigs['toolbar'][] = $buttonConfigs[$button];
-			}
+    public function generateJS()
+    {
+        $arrConfigs = array(
+        'status'            => array(
+        'lines',
+        'words',
+        'cursor'
+        ),
+        'toolbar'            => array()
+        );
+        $buttonConfigs = $this->getButtonConfigs();
+        foreach($this->getButtons() as $button){
+            if(array_key_exists($button, $buttonConfigs)) {
+                $arrConfigs['toolbar'][] = $buttonConfigs[$button];
+            }
 
-		}
+        }
 
-		$strJSON = Convert::array2json($arrConfigs);
-		return sprintf(
-			'markdownEditorConfigs.%s = %s;',
-			$this->identifier,
-			$strJSON
-		);
-	}
+        $strJSON = Convert::array2json($arrConfigs);
+        return sprintf(
+            'markdownEditorConfigs.%s = %s;',
+            $this->identifier,
+            $strJSON
+        );
+    }
 
 }

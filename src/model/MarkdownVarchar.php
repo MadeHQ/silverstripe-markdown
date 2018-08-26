@@ -15,20 +15,24 @@ use SilverStripe\Forms\TextField;
  * To change this template use File | Settings | File Templates.
  */
 
-class MarkdownVarchar extends DBVarchar {
+class MarkdownVarchar extends DBVarchar
+{
 
-	function forTemplate(){
-		$parser = new \ParsedownExtra();
-		$value = ShortcodeParser::get_active()->parse($this->value);
-		return $parser->text($value);
-	}
+    function forTemplate()
+    {
+        $parser = new \ParsedownExtra();
+        $value = ShortcodeParser::get_active()->parse($this->value);
+        return $parser->text($value);
+    }
 
-	public function scaffoldFormField($title = null, $params = null) {
-		return new MarkdownEditorField($this->name, $title);
-	}
+    public function scaffoldFormField($title = null, $params = null) 
+    {
+        return new MarkdownEditorField($this->name, $title);
+    }
 
-	public function scaffoldSearchField($title = null, $params = null) {
-		return new TextField($this->name, $title);
-	}
+    public function scaffoldSearchField($title = null, $params = null) 
+    {
+        return new TextField($this->name, $title);
+    }
 
 }

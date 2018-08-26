@@ -26,8 +26,9 @@ class MarkdownCloudinaryUpload extends Extension
     /**
      * update the field holder adding new javascript
      */
-    public function updateFieldHolder(){
-        if(Config::inst()->get('MarkdownCloudinaryUpload', 'enable') == true){
+    public function updateFieldHolder()
+    {
+        if(Config::inst()->get('MarkdownCloudinaryUpload', 'enable') == true) {
             Requirements::javascript('markdown/javascript/MarkdownCloudinaryUpload.js');
         }
     }
@@ -44,7 +45,7 @@ class MarkdownCloudinaryUpload_Controller extends Controller
      * Assign themes to use for cms
      *
      * @config
-     * @var array
+     * @var    array
      */
     private static $admin_themes = [
         'silverstripe/framework:/admin/themes/cms-forms',
@@ -68,18 +69,20 @@ class MarkdownCloudinaryUpload_Controller extends Controller
     public function ImageForm()
     {
         $numericLabelTmpl = '<span class="step-label"><span class="flyout">Step %d.</span>'
-			. '<span class="title">%s</span></span>';
+        . '<span class="title">%s</span></span>';
         $fields = new FieldList();
         $headerWrapper = CompositeField::create(
             LiteralField::create('Heading', '<h3 class="">Insert Image</h3>')
         );
         $contentComposite = new CompositeField(
-            LiteralField::create('Step1',
+            LiteralField::create(
+                'Step1',
                 '<div class="step1">'
                 . sprintf($numericLabelTmpl, '1', _t('HtmlEditorField.SELECTIMAGE', 'Select Image')) . '</div>'
             ),
             ImageField::create('Image')->addExtraClass('markdown-popup'),
-            LiteralField::create('Step2',
+            LiteralField::create(
+                'Step2',
                 '<div class="step2">'
                 . sprintf($numericLabelTmpl, '2', _t('HtmlEditorField.DETAILS', 'Details')) . '</div>'
             ),
@@ -102,8 +105,8 @@ class MarkdownCloudinaryUpload_Controller extends Controller
             $actions
         );
 
-		$headerWrapper->setName('HeaderWrap');
-		$headerWrapper->addExtraClass('CompositeField composite cms-content-header form-group--no-label');
+        $headerWrapper->setName('HeaderWrap');
+        $headerWrapper->addExtraClass('CompositeField composite cms-content-header form-group--no-label');
         $contentComposite->setName('ContentBody');
         $contentComposite->addExtraClass('ss-insert-image content ss-insert-media');
         $form->setFormAction('cloudinary-upload/ImageForm');
@@ -118,7 +121,8 @@ class MarkdownCloudinaryUpload_Controller extends Controller
      *
      * @return string
      */
-    public function getImageTag(){
+    public function getImageTag()
+    {
         $strRet = '';
         $arrPieces = array('cloudinary_image');
 
@@ -150,8 +154,10 @@ class MarkdownCloudinaryUpload_Controller extends Controller
             $strRet = '['. implode(', ', $arrPieces) . ']';
         }
 
-        return Convert::array2json(array(
+        return Convert::array2json(
+            array(
             'Markdown'  => $strRet
-        ));
+            )
+        );
     }
 }
