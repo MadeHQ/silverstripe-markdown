@@ -2,11 +2,13 @@
 
 namespace MadeHQ\Markdown\Extensions;
 
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Config\Config;
+use MadeHQ\Markdown\Model\MarkdownText;
+use MadeHQ\Markdown\Model\MarkdownVarchar;
 use SilverStripe\Forms\HTMLEditor\HtmlEditorField;
 
 /**
@@ -16,13 +18,15 @@ use SilverStripe\Forms\HTMLEditor\HtmlEditorField;
  * Time: 8:47 AM
  * To change this template use File | Settings | File Templates.
  */
-class MarkdownExtension extends DataExtension {
+class MarkdownExtension extends DataExtension
+{
 
     private static $replace_html_fields = true;
     private static $db_field_cache = array();
     private static $disable_markdown_fields = false;
 
-    protected static function without_markdown_fields($callback) {
+    protected static function without_markdown_fields($callback)
+    {
         $before = self::$disable_markdown_fields;
         self::$disable_markdown_fields = true;
         $result = $callback();
@@ -36,35 +40,48 @@ class MarkdownExtension extends DataExtension {
         if(isset(self::$db_field_cache[$class])) {
             return self::$db_field_cache[$class];
         }
-        $db = self::without_markdown_fields(function() use ($class) {
-            return Config::inst()->get($class, 'db', Config::UNINHERITED);;
-        });
+        $db = self::without_markdown_fields(
+            function () use ($class) {
+                return Config::inst()->get($class, 'db', Config::UNINHERITED);;
+            }
+        );
         self::$db_field_cache[$class] = $db;
         return self::$db_field_cache[$class];
     }
 
-
-    public static function get_extra_config($class, $extension, $args) {
-        if(!self::$replace_html_fields) return array();
-        if(self::$disable_markdown_fields) return array();
-
-        $config = Config::inst();
+    public static function get_extra_config($class, $extension, $args)
+    {
+        if (!self::$replace_html_fields) {
+            return array();
+        }
+        if (self::$disable_markdown_fields) {
+            return array();
+        }
+        
         // Merge all config values for subclasses
         foreach (ClassInfo::subclassesFor($class) as $subClass) {
-            if($db = self::get_db_fields_for_class($subClass)) {
+            if ($db = self::get_db_fields_for_class($subClass)) {
                 $updated = false;
                 foreach ($db as $field => $type) {
                     if (strpos($type, 'HTMLText') !== false) {
                         $updated = true;
-                        $db[$field] = str_replace($type, 'HTMLText', 'MadeHQ\Markdown\Model\MarkdownText');
+                        $db[$field] = str_replace(
+                            'HTMLText',
+                            MarkdownText::class,
+                            $type
+                        );
                     }
                     if (strpos($type, 'HTMLVarchar') !== false) {
                         $updated = true;
-                        $db[$field] = str_replace($type, 'HTMLVarchar', 'MarkdownVarchar');
+                        $db[$field] = str_replace(
+                            'HTMLVarchar',
+                            MarkdownVarchar::class,
+                            $type
+                        );
                     }
                 }
                 if ($updated) {
-                    $config->update($subClass, 'db', $db);
+                    Config::modify()->merge($subClass, 'db', $db);
                 }
             }
         }
@@ -73,19 +90,23 @@ class MarkdownExtension extends DataExtension {
     }
 
 
-    public function updateCMSFieldSecondary(FieldList $fields){
+    public function updateCMSFieldSecondary(FieldList $fields)
+    {
         $this->updateCMSFields($fields);
     }
 
 
-    public function updateCMSFields(FieldList $fields){
-        if(Config::inst()->get('MarkdownExtension', 'replace_html_fields')){
+    public function updateCMSFields(FieldList $fields)
+    {
+        if(Config::inst()->get('MarkdownExtension', 'replace_html_fields')) {
             foreach($fields->dataFields() as $field) {
                 if($field instanceof HtmlEditorField) {
                     $attributes = $field->getAttributes();
 
-                    $fields->replaceField($field->getName(),
-                        MarkdownEditorField::create($field->getName(), $field->Title())->setRows($attributes['rows']));
+                    $fields->replaceField(
+                        $field->getName(),
+                        MarkdownEditorField::create($field->getName(), $field->Title())->setRows($attributes['rows'])
+                    );
                 }
             }
         }
