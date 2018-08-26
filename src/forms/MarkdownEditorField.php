@@ -27,19 +27,19 @@ class MarkdownEditorField extends TextareaField
         $this->extraClasses['stacked'] = 'stacked';
 
         $this->include_js();
-        Requirements::css(MARKDOWN_MODULE_BASE . '/client/font-awesome-4.3.0/css/font-awesome.min.css');
-        Requirements::css(MARKDOWN_MODULE_BASE . '/client/css/MarkdownEditor.css');
-        Requirements::css(MARKDOWN_MODULE_BASE . '/client/editor/simplemde.min.css');
+        Requirements::css(MARKDOWN_MODULE_BASE . ':client/font-awesome-4.3.0/css/font-awesome.min.css');
+        Requirements::css(MARKDOWN_MODULE_BASE . ':client/css/MarkdownEditor.css');
+        Requirements::css(MARKDOWN_MODULE_BASE . ':client/editor/simplemde.min.css');
 
         if (0 && Director::isDev()) {
-            Requirements::javascript(MARKDOWN_MODULE_BASE . '/client/editor/sourcefiles/codemirror/codemirror.js');
-            Requirements::javascript(MARKDOWN_MODULE_BASE . '/client/editor/sourcefiles/simplemde.js');
+            Requirements::javascript(MARKDOWN_MODULE_BASE . ':client/editor/sourcefiles/codemirror/codemirror.js');
+            Requirements::javascript(MARKDOWN_MODULE_BASE . ':client/editor/sourcefiles/simplemde.js');
         } else {
-            Requirements::javascript(MARKDOWN_MODULE_BASE . '/client/editor/simplemde.min.js');
+            Requirements::javascript(MARKDOWN_MODULE_BASE . ':client/editor/simplemde.min.js');
         }
 
-        Requirements::javascript(MARKDOWN_MODULE_BASE . '/client/js/MarkdownEditorField.js');
-        Requirements::javascript(MARKDOWN_MODULE_BASE . '/client/js/MarkDownShortCode.js');
+        Requirements::javascript(MARKDOWN_MODULE_BASE . ':client/js/MarkdownEditorField.js');
+        Requirements::javascript(MARKDOWN_MODULE_BASE . ':client/js/MarkDownShortCode.js');
 
         $this->extend("updateFieldHolder");
         return parent::FieldHolder($properties);
