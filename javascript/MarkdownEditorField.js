@@ -40,7 +40,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                 var regex = /\".*\":.*/;
 
 
-                dialog.find('.field#LinkText').find('input').val('');
+                dialog.find('.field#Form_EditorToolbarLinkForm_LinkText_Holder').find('input').val('');
                 dialog.find('.field#Description').find('input').val('');
                 dialog.find('.treedropdownfield-title').text('(Choose or Search)');
                 dialog.find('#Form_EditorToolbarLinkForm_internal').val('');
@@ -87,7 +87,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                             dialog.find('#Form_EditorToolbarLinkForm_Anchor').val(url.replace('#', ''));
                         }
 
-                        dialog.find('.field#LinkText').find('input').val(linkText);
+                        dialog.find('.field#Form_EditorToolbarLinkForm_LinkText_Holder').find('input').val(linkText);
                         dialog.find('.field#Description').find('input').val(linkTitle);
 
                         if(className.indexOf('targetblank') != -1){
@@ -96,7 +96,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
 
                     }
                     else{
-                        dialog.find('.field#LinkText').find('input').val(strText);
+                        dialog.find('.field#Form_EditorToolbarLinkForm_LinkText_Holder').find('input').val(strText);
                     }
                 }
 
