@@ -74,6 +74,10 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                             dialog.find('#Form_EditorToolbarLinkForm_LinkType_internal').attr('checked', 'checked');
                             dialog.find('#Form_EditorToolbarLinkForm_internal').val(url.replace('[sitetree_link,id=', '').replace(']', ''));
                         }
+                        else if(url.indexOf('file_link,id=') != -1){
+                            dialog.find('#Form_EditorToolbarLinkForm_LinkType_file').attr('checked', 'checked');
+                            dialog.find('#Form_EditorToolbarLinkForm_file').val(url.replace('[file_link,id=', '').replace(']', ''));
+                        }
                         else if (url.indexOf('http') == 0){
                             dialog.find('#Form_EditorToolbarLinkForm_LinkType_external').attr('checked', 'checked');
                             dialog.find('#Form_EditorToolbarLinkForm_external').val(url);
@@ -420,6 +424,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                 if(linkType == 'internal' || linkType == 'anchor') this.find('.field#Form_EditorToolbarLinkForm_Anchor_Holder').show();
                 if(linkType !== 'email') this.find('.field#Form_EditorToolbarLinkForm_TargetBlank_Holder').show();
                 if(linkType == 'anchor') this.find('.field#Form_EditorToolbarLinkForm_Anchor_Holder').show();
+                if(linkType == 'file') this.find('.field#Form_EditorToolbarLinkForm_file_Holder').show();
                 this.find('.field#Form_EditorToolbarLinkForm_Description_Holder').show();
                 this.find('.field#Form_EditorToolbarLinkForm_LinkText_Holder').show();
 
@@ -440,6 +445,10 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                     case 'internal':
                         href = '[sitetree_link,id=' + this.find(':input[name=internal]').val() + ']';
                         if(anchor) href += '#' + anchor;
+                        break;
+
+                    case 'file':
+                        href = '[file_link,id=' + this.find(':input[name=file]').val() + ']';
                         break;
 
                     case 'anchor':

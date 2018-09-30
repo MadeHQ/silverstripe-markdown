@@ -138,6 +138,7 @@ class MarkdownEditorField_Toolbar extends RequestHandler {
                             'external' => _t('MarkdownEditorField.LINKEXTERNAL', 'Another website'),
                             'anchor' => _t('MarkdownEditorField.LINKANCHOR', 'Anchor on this page'),
                             'email' => _t('MarkdownEditorField.LINKEMAIL', 'Email address'),
+                            'file' => _t('MarkdownEditorField.LINKFILE', 'Uploaded file'),
                         ),
                         'internal'
                     ),
