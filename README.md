@@ -2,7 +2,7 @@
 SilverStripe Module. Replaces TinyMCE with a Markdown editor.
 
 ## Dependencies
-* [SimpleMDE Markdown Editor](https://github.com/NextStepWebs/simplemde-markdown-editor)
+* [SimpleMDE Markdown Editor](https://github.com/sparksuite/simplemde-markdown-editor)
 * [Parsedown](http://parsedown.org)
 
 ## License ##
