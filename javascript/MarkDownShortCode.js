@@ -18,7 +18,7 @@ if (typeof MadeUtils === 'undefined') { var MadeUtils = {};}
                     var pageId = $('.cms-edit-form :input[name=ID]').val();
                     postdata.PageId = pageId
                 }
-                var url = 'admin/shortcodable/ShortcodeForm/forTemplate';
+                var url = 'ShortcodableController/ShortcodeForm/forTemplate';
                 $.post(url, postdata, function(data){
                     dialog.removeClass('loading');
                     dialog.html(data);
