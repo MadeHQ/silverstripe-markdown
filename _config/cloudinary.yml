@@ -1,0 +1,11 @@
+---
+Name: markdowncloudinary
+Only:
+  moduleexists: 'mademedia/silverstripe-markdown'
+After:
+    - framework/*
+---
+
+MadeHQ\Cloudinary\Forms\File:
+  extensions:
+    - MadeHQ\Markdown\Extensions\MarkdownCloudinaryUpload
