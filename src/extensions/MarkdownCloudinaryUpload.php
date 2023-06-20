@@ -156,10 +156,6 @@ class MarkdownCloudinaryUpload_Controller extends Controller
             $strRet = '['. implode(', ', $arrPieces) . ']';
         }
 
-        return Convert::array2json(
-            array(
-            'Markdown'  => $strRet
-            )
-        );
+        return json_encode(['Markdown'  => $strRet]);
     }
 }

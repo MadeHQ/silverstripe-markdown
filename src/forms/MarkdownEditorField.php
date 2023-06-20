@@ -2,10 +2,23 @@
 
 namespace MadeHQ\Markdown\Forms;
 
-use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Control\Director;
+use SilverStripe\Forms\EmailField;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\HiddenField;
 use SilverStripe\View\Requirements;
-use SilverStripe\Control\RequestHandler;
 use SilverStripe\Control\Controller;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\OptionsetField;
+use SilverStripe\Control\RequestHandler;
+use SilverStripe\Forms\TreeDropdownField;
 
 /**
  * Class MarkdownField
@@ -168,7 +181,6 @@ class MarkdownEditorField_Toolbar extends RequestHandler
                 )
             ),
             new FieldList(
-
                 FormAction::create('insert', _t('HtmlEditorField.BUTTONINSERTLINK', 'Insert link'))
                     ->addExtraClass('ss-ui-action-constructive')
                     ->setAttribute('data-icon', 'accept')
