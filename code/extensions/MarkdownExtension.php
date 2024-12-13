@@ -48,7 +48,6 @@ class MarkdownExtension extends DataExtension {
         if(!self::$replace_html_fields) return array();
         if(self::$disable_markdown_fields) return array();
 
-        $config = Config::inst();
         // Merge all config values for subclasses
         foreach (ClassInfo::subclassesFor($class) as $subClass) {
             if($db = self::get_db_fields_for_class($subClass)) {
@@ -64,7 +63,7 @@ class MarkdownExtension extends DataExtension {
                     }
                 }
                 if ($updated) {
-                    $config->update($subClass, 'db', $db);
+                    Config::forClass($subClass)->merge('db', $db);
                 }
             }
         }

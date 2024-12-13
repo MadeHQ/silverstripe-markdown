@@ -1,7 +1,6 @@
 <?php
 
 use SilverStripe\Core\ClassInfo;
-use SilverStripe\Core\Object;
 use MadeHQ\Markdown\Forms\MarkdownEditorField;
 
 define('MARKDOWN_MODULE_BASE', basename(dirname(__FILE__)));

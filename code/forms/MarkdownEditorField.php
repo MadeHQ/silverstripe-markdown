@@ -6,6 +6,7 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\View\Requirements;
 use SilverStripe\Control\RequestHandler;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
 
 /**
  * Class MarkdownField
@@ -26,20 +27,20 @@ class MarkdownEditorField extends TextareaField
         $this->extraClasses['stacked'] = 'stacked';
 
 		$this->include_js();
-		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/font-awesome-4.3.0/css/font-awesome.min.css');
-		Requirements::css(MARKDOWN_MODULE_BASE . '/admin/css/MarkdownEditor.css');
-		Requirements::css(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.css');
+		Requirements::css('mademedia/silverstripe-markdown: thirdparty/font-awesome-4.3.0/css/font-awesome.min.css');
+		Requirements::css('mademedia/silverstripe-markdown: admin/css/MarkdownEditor.css');
+		Requirements::css('mademedia/silverstripe-markdown: thirdparty/editor/simplemde.min.css');
 
 		if(0 && Director::isDev()){
-			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/sourcefiles/codemirror/codemirror.js');
-			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/sourcefiles/simplemde.js');
+			Requirements::javascript('mademedia/silverstripe-markdown: thirdparty/editor/sourcefiles/codemirror/codemirror.js');
+			Requirements::javascript('mademedia/silverstripe-markdown: thirdparty/editor/sourcefiles/simplemde.js');
 		}
 		else{
 
-			Requirements::javascript(MARKDOWN_MODULE_BASE . '/thirdparty/editor/simplemde.min.js');
+			Requirements::javascript('mademedia/silverstripe-markdown: thirdparty/editor/simplemde.min.js');
 		}
-		Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkdownEditorField.js');
-        Requirements::javascript(MARKDOWN_MODULE_BASE . '/javascript/MarkDownShortCode.js');
+		Requirements::javascript('mademedia/silverstripe-markdown: javascript/MarkdownEditorField.js');
+        Requirements::javascript('mademedia/silverstripe-markdown: javascript/MarkDownShortCode.js');
 
         $this->extend("updateFieldHolder");
         return parent::FieldHolder($properties);
