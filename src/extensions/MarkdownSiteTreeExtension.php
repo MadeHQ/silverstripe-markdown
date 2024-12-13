@@ -11,7 +11,7 @@ use SilverStripe\Forms\FieldList;
 /**
  * Class MarkdownSiteTreeExtension
  *
- * @package markdown
+ * @package    markdown
  * @subpackage extensions
  */
 class MarkdownSiteTreeExtension extends DataExtension
@@ -27,13 +27,14 @@ class MarkdownSiteTreeExtension extends DataExtension
      *
      * @return string Parsed HTML
      */
-    public function ParseContent() {
-		$content = $this->owner->dbObject('Content');
-		$strContent = $content;
-		if(method_exists($content, 'forTemplate')){
-			$strContent = $content->forTemplate();
-		}
-		$template = SSViewer_FromString::fromString($strContent);
-		return $this->owner->renderWith($template);
+    public function ParseContent() 
+    {
+        $content = $this->owner->dbObject('Content');
+        $strContent = $content;
+        if(method_exists($content, 'forTemplate')) {
+            $strContent = $content->forTemplate();
+        }
+        $template = SSViewer_FromString::fromString($strContent);
+        return $this->owner->renderWith($template);
     }
 }

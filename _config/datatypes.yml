@@ -1,0 +1,8 @@
+---
+Name: markdowndatatypes
+---
+SilverStripe\Core\Injector\Injector:
+  MarkdownText:
+    class: MadeHQ\Markdown\Model\MarkdownText
+  MarkdownVarchar:
+    class: MadeHQ\Markdown\Model\MarkdownVarchar
